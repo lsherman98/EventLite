@@ -9,11 +9,11 @@ const ProfileButton = ({ user }) => {
     const [showMenu, setShowMenu] = useState(false)
     const dropdownRef = useRef(null);
     const navigate = useNavigate()
+   
 
     const handleLogout = (e) => {
         e.preventDefault();
         dispatch(logout());
-
     };
 
     const toggleMenu = (e) => {
@@ -39,17 +39,18 @@ const ProfileButton = ({ user }) => {
 
     return (
     <>
-      <button onClick={toggleMenu}>{user.username}</button>
+      <Link className="profile-button" onClick={toggleMenu}>{user.username}
       {showMenu && (
-      <ul ref={dropdownRef}>
+      <ul className="profile-dropdown" ref={dropdownRef}>
         <li>
-          <Link to={`/profile`} state={{ user: user }}>Go to Profile</Link>
+          <Link to={`/profile`}>Go to Profile</Link>
         </li>
         <li>
           <button onClick={handleLogout}>Log Out</button>
         </li>
       </ul>
       )}
+      </Link>
     </>
   );
 }

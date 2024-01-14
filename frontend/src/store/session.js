@@ -41,14 +41,14 @@ export const signup = ({username, email, firstName, lastName, password}) => asyn
     }
 };
 
-export const logout = (userId) => async (dispatch) => {
+export const logout = () => async (dispatch) => {
     // eslint-disable-next-line no-unused-vars
     const response = await csrfFetch("/api/session", {
         method: "DELETE"
     });
     sessionStorage.setItem('currentUser', null)
     if (response.ok) {
-        dispatch(logoutUser(userId));
+        dispatch(logoutUser());
     }
 };
 

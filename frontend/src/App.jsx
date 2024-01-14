@@ -4,6 +4,7 @@ import SignUpForm from "./components/session/SignUpForm";
 import UserProfile from "./components/UserProfile/UserProfile";
 import LoginForm from "./components/session/LoginForm";
 import UserShow from "./components/UserProfile/UserShow";
+import HomePage from "./components/HomePage/HomePage";
 
 
 
@@ -24,7 +25,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <h1>Home Page</h1>,
+        element: <HomePage />,
       },
       {
         path: '/login',

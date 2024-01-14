@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import * as sessionActions from '../../store/session';
+import { Link } from "react-router-dom";
 
 
 const SignUpForm = () => {
@@ -42,71 +43,106 @@ const SignUpForm = () => {
     }
 
     return (
-        <div>
-            <h1>Sign Up</h1>
-            <form onSubmit={handleSubmit} >
-                <ul>
-                    {errors.map(error => <li key={error}>{error}</li>)}
-                </ul>
+         <div className="login-page">
+            <div className="signup-left">
+                <div className="left-content">
+                    <div className="login-headers">
+                        <h3 className="login-logo">eventlite</h3>
+                        <h1 className="login-heading">Sign Up</h1>
+                    </div>
+                    <div className="login-form-container">
+                        <form onSubmit={handleSubmit} className="login-form">
+                            <div className="submit-errors">
+                                    {errors.map(error => <p key={error}>{error}</p>)}
+                            </div>
 
-                <label>Username
-                    <input 
-                        type="text" 
-                        value={username} 
-                        onChange={(e) => setUsername(e.target.value)}
-                        required
-                    />
-                </label>
+                            <input 
+                                className="form-input"
+                                placeholder="Username"
+                                maxLength="256"
+                                name='username'
+                                type="text" 
+                                value={username} 
+                                onChange={(e) => setUsername(e.target.value)}
+                                required
+                            />
 
-                 <label>First Name
-                    <input 
-                        type="text" 
-                        value={firstName} 
-                        onChange={(e) => setFirstName(e.target.value)}
-                        required
-                    />
-                </label>
+                            <input 
+                                className="form-input"
+                                placeholder="First Name"
+                                maxLength="256"
+                                name='first name'
+                                type="text" 
+                                value={firstName} 
+                                onChange={(e) => setFirstName(e.target.value)}
+                                required
+                            />
 
-                 <label>Last Name
-                    <input 
-                        type="text" 
-                        value={lastName} 
-                        onChange={(e) => setLastName(e.target.value)}
-                        required
-                    />
-                </label>
+                            <input 
+                                className="form-input"
+                                placeholder="Last Name"
+                                maxLength="256"
+                                name='last name'
+                                type="text" 
+                                value={lastName} 
+                                onChange={(e) => setLastName(e.target.value)}
+                                required
+                            />
 
-                <label>Email
-                    <input 
-                        type="text" 
-                        value={email} 
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                    />
-                </label>                
+                            <input 
+                                className="form-input"
+                                placeholder="Email Address"
+                                maxLength="256"
+                                name='email'
+                                type="email" 
+                                value={email} 
+                                onChange={(e) => setEmail(e.target.value)}
+                                required
+                            />
 
-                <label>Password
-                    <input 
-                        type="password" 
-                        value={password} 
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                    />
-                </label>
+                            <input 
+                                className="form-input"
+                                placeholder="Password"
+                                maxLength="256"
+                                name='password'
+                                type="password" 
+                                value={password} 
+                                onChange={(e) => setPassword(e.target.value)}
+                                required
+                            />
 
-                <label>Confirm Password
-                    <input 
-                        type="password" 
-                        value={confirmPassword} 
-                        onChange={(e) => setConfirmPassword(e.target.value)}
-                        required
-                    />
-                </label>
+                            <input 
+                                className="form-input"
+                                placeholder="Confirm Password"
+                                maxLength="256"
+                                name='confirm password'
+                                type="password" 
+                                value={confirmPassword} 
+                                onChange={(e) => setConfirmPassword(e.target.value)}
+                                required
+                            />
 
-                <button type="submit">Sign Up</button>
-            </form>
+                            <div className="login-buttons">
+                                <input 
+                                    type="submit"
+                                    className="signup-submit-button"
+                                    value="Sign Up" 
+                                />
+                            </div>
+                        </form>
+                    </div>
+                    <Link to='/login'>Log in</Link>
+                </div>
+            </div>
+            <div className="login-right">
+
+            </div>
+
         </div>
     )
 }
 
 export default SignUpForm
+
+
+

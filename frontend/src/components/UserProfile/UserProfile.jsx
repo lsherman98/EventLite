@@ -1,15 +1,24 @@
+import { useEffect } from "react";
 import { useSelector } from "react-redux"
+import { useNavigate } from "react-router-dom";
 
 
 
 const UserProfile = () => {
 
-    const user = useSelector(state => state.session.user)
+    const sessionUser = useSelector(state => state.session.user) || null
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        if (!sessionUser) {
+            navigate("/")
+        }
+    }, [sessionUser, navigate])
 
     return (
         <>
             <h1>Profile page</h1>
-            <p>{user.username}</p>
+            <p>{sessionUser ? sessionUser.username : ''}</p>
         </>
     )
 
