@@ -1,4 +1,74 @@
 
 .homepage {
-    padding-top: 75px;
+    /* padding-top: 75px; */
+}
+
+.homepage-banner {
+    width: 100vw;
+    padding-bottom: 40px;
+}
+
+.category-links {
+    margin: 40px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    display: flex;
+    justify-content: space-around;
+    padding-bottom: 20px;
+}
+
+.category-link-block {
+    flex-direction: column;
+    justify-content: center;
+    align-self: auto;
+    align-items: center;
+    text-decoration: none;
+    display: flex;
+    border-radius: 40px;
+
+}
+
+.category-link-block:hover .category-link-image {
+    transform: scale(0.98);
+    box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
+}
+
+.category-link-block:hover .category-link-heading {
+    transform: scale(0.98);
+}
+
+.category-link-image {
+    width: 100px;
+    border: 4px solid #d1d1d1;
+    border-radius: 40px;
+    padding: 25px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+    display: block;
+    position: static;
+    max-width: 100%;
+}
+
+.category-link-heading {
+    color: black;
+    text-align: center;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 16px;
+    text-decoration: none;
+    font-style: normal;
+    margin-top: 10px;
+}
+
+.section-header {
+    text-align: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: normal;
+    color: #919191;
+    font-size: 32px;
+}
+
+.section-header > span {
+    color: #f05537;
+    font-weight: bold;
+
 }

@@ -1,0 +1,225 @@
+.user-show-banner-main {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+    min-height: 650px;
+    padding-top: 100px;
+}
+
+
+.banner-image {
+    width: 100vw;
+    height: 840px;
+    top: -280px;
+    overflow: hidden;
+    position: absolute;
+}
+
+.banner-image > img {
+    width: 100%;
+    max-width: none;
+    position: static;
+    vertical-align: middle;
+    display: inline-block;
+    filter: blur(15px);
+    vertical-align: middle;
+
+}
+
+.info-modal {
+    background-color: white;
+    border-radius: 18px;
+    position: relative;
+    box-shadow: 0 3px 15px 5px rgba(110, 110, 110, .2);;
+}
+
+.info-modal-content-parent {
+    width: 50vw;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 40px;
+    display: flex;
+}
+
+.info-modal-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.info-modal-logo {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.info-modal-logo > img {
+    width: 171px;
+    border-radius: 185px;;
+}
+
+.info-modal-header {
+    color: #001570;
+    text-align: center;
+    font-size: 38px;
+}
+
+.info-modal-contact-button {
+    width: 50%;
+    justify-content: center;
+    padding: 15px 25px 20px;
+    display: flex;
+    align-self: center;
+}
+
+.info-modal-contact-button > a {
+    text-decoration: none;
+    color: white;
+    text-align: center;
+    background-color: #4668ff;
+    border-radius: 7px;
+    padding: 10px 30px;
+    font-size: 16px;
+}
+
+.info-modal-total-events {
+    justify-content: center;
+    display: flex;
+    padding-bottom: 15px;
+}
+
+.info-modal-total-events > p {
+    color: #646464;
+    text-align: center;
+}
+
+.info-modal-total-events > p > span {
+    color: black;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.social-media-icons {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.social-media-icons > img {
+    width: 45px;
+    padding: 5px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+
+
+.user-show-events-main {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.user-events-content {
+    width: 90%;
+    text-align: left;
+    align-self: auto;
+    padding-bottom: 60px;
+}
+
+
+.user-events-header > h1 {
+    color: #001471;
+    margin: 0;
+    font-size: 38;
+    line-height: 44px;
+}
+
+.user-events-header > a {
+    color: #001471;
+    border: 3px solid #d3d3d3;
+    border-radius: 12px;
+    margin: 15px 26px 15px 0px;
+    padding: 5px 15px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.user-events {
+    width: 100%;
+    max-width: none;
+    grid-column-gap: 0px;
+    grid-row-gap: 25px;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 30px;
+    margin-left: 0px;
+    margin-right: 0px;
+    padding: 0px;
+    display: flex;
+}
+
+.user-show-event-component {
+    width: 22rem;
+    height: auto;
+    max-width: none;
+    min-width: 15rem;
+    border: 0 #000;
+    border-radius: 20px;
+    margin-left: 0;
+    margin-right: 20px;
+    padding-top: 0;
+    padding-left: 0;
+    padding-right: 0;
+    overflow: hidden;
+    box-shadow: 2px 3px 7px rgba(0, 0, 0, .2);
+}
+
+.user-show-event-component > img {
+    width: 382px;
+    position: relative;
+    top: 0;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .2);
+    vertical-align: middle;
+}
+
+.user-show-event-like-button {
+    width: 50px;
+    height: 50px;
+    background-color: #fff;
+    border: 1px solid #dbdbdb;
+    border-radius: 65px;
+    justify-content: center;
+    align-items: center;
+    margin-left: 0;
+    padding: 0;
+    display: flex;
+    position: relative;
+    top: -24px;
+    left: 228px;
+}
+
+.user-show-event-like-button > img {
+    width: 25px;
+    max-width: 100%;
+    vertical-align: middle;
+}
+
+.user-show-event-details {
+    padding-bottom: 11px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.user-show-event-details > h3 {
+    color: #8469a0;
+    text-align: left;
+    margin-top: -15px;
+    font-size: 16px;
+}
+    

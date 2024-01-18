@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import sessionReducer from './session';
 import userProfileReducer from './user'
+import eventReducer from './events'
 
 const store = configureStore({
     reducer: {
         session: sessionReducer,
-        profile: userProfileReducer
+        profile: userProfileReducer,
+        events: eventReducer
     },
     devTools: process.env.NODE_ENV !== 'production',
 });

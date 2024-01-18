@@ -1,16 +1,15 @@
 .navbar {
     width: 100%;
-    height: 100%;
     display: block;
     z-index: 1000;
-    position: fixed;
+    position: relative;
 }
 
 .nav-container {
     width: 100vw;
     height: 75px;
     display: flex;
-    background-color: #ddd;
+    background-color: #ffffff;
     justify-content: space-between;
 }
 
@@ -19,7 +18,7 @@
     margin-left: 30px;
     margin-top: 15px;
     margin-bottom: 10px;
-    font-family: Montserrat;
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 24px;
     line-height: 44px;
     font-weight: bold;
@@ -30,33 +29,119 @@
 }
 
 .nav-menu {
-    margin-right: 100px;
+    display: flex;
+    align-items: center;
+    padding-right: 40px;
+}
+
+.nav-links {
+    height: 100%;
     display: flex;
     align-items: center;
 }
 
 .nav-link {
     color: black;
-    padding: 20px;
     text-decoration: none;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
+.nav-link:hover {
+    transform: scale(1.1);
+    color:#f05537;
+}
+
+.ticket-button:hover .icon-p,
+.like-button:hover .icon-p {
+    transform: scale(1.1);
+    color:#f05537;
+}
+
+.ticket-button:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+.like-button:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+.dropdown-container {
+    height: 100%;
+    display: block;
+}
 
 .profile-button {
-    color: black;
+    justify-content: center;
+    display: flex;
     text-decoration: none;
-
+    margin-top: 15%;
+    cursor: pointer;
 }
 
+.profile-button-text {
+    align-self: center;
+    padding-left: 10px;
+    color: black;
+}
+
+
 .profile-dropdown {
-    list-style: none;
-    position: fixed;
-    right: 12%;
     padding-inline-start: 0;
-    background-color: #ddd;
-    margin-top: 20px;
+    position: relative;
+    top: 15%;
+    background-color: #ffffff;
     font-size: 16px;
-    padding: 20px;
+    list-style: none;
+    width:  160px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.dropdown-item {
+    text-align: center;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.dropdown-item:hover {
+    background-color: #f0f0f0;
+    cursor: pointer;
+}
+.profile-dropdown li a {
+    text-decoration: none;
+    color: black;
+}
+
+
+
+.ticket-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.like-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.icon-p {
+    margin-top: 5px;
+}
+
+.ticket-icon {
+    transform: rotate(90deg);
 }
 
 

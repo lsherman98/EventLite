@@ -8,51 +8,34 @@ const ProfileButton = ({ user }) => {
     const dispatch = useDispatch()
     const [showMenu, setShowMenu] = useState(false)
     const dropdownRef = useRef(null);
-    const navigate = useNavigate()
-   
 
     const handleLogout = (e) => {
         e.preventDefault();
         dispatch(logout());
     };
 
-    const toggleMenu = (e) => {
-        e.stopPropagation(); // Keep click from bubbling up to document and triggering closeMenu
-        setShowMenu(!showMenu);
-        navigate('/')
-  };
-
-    useEffect(() => {
-        if (!showMenu) return
-        
-        const closeMenu = (e) => {
-            if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
-                setShowMenu(false);
-            }
-        };
-
-        document.addEventListener('click', closeMenu);
-
-        return () => document.removeEventListener('click', closeMenu);
-    }, [showMenu]);
-
-
     return (
-    <>
-      <Link className="profile-button" onClick={toggleMenu}>{user.username}
-      {showMenu && (
-      <ul className="profile-dropdown" ref={dropdownRef}>
-        <li>
-          <Link to={`/profile`}>Go to Profile</Link>
-        </li>
-        <li>
-          <button onClick={handleLogout}>Log Out</button>
-        </li>
-      </ul>
-      )}
-      </Link>
-    </>
+      <div className="dropdown-container" onMouseEnter={() => setShowMenu(true)} onMouseLeave={() => setShowMenu(false)}>
+        <div className="profile-button"  >
+          <img width="29" src="https://assets-global.website-files.com/65972da33a848ad8e00a649c/65a48746508d4d48e9f838d8_profile_12382840.png" alt="" />
+          <div className="profile-button-text">{user.email}</div>
+          <img width="33" src="https://assets-global.website-files.com/65972da33a848ad8e00a649c/65a48248987628aaabcd73cf_down.png" alt="" />
+        </div>
+        {showMenu && (
+        <ul className="profile-dropdown" ref={dropdownRef}>
+          <li className="dropdown-item">
+            <Link to={`/profile`}>Go to Profile</Link>
+          </li>
+          <li className="dropdown-item">
+            <p onClick={handleLogout}>Log Out</p>
+          </li>
+        </ul>
+        )}
+      </div>
   );
 }
 
 export default ProfileButton
+
+
+

@@ -1,0 +1,131 @@
+
+
+.events-index-main {
+    display: flex;
+}
+
+.events-index-left {
+    width: 60%;
+    max-width: none;
+    margin-left: 40px;
+    margin-right: auto;
+    display: block;
+}
+
+.events-index-right {
+    height: 100vh;
+    max-width: none;
+    text-align: left;
+    object-fit: fill;
+    flex: 0 auto;
+    order: 0;
+    position: sticky;
+    top: 0;
+    overflow: hidden;
+}
+
+.events-index-right > img {
+    width: 770px;
+    max-width: none;
+    object-fit: cover;
+    display: inline-block;
+    position: relative;
+    bottom: auto;
+    right: auto;
+    /* overflow: visible; */
+    vertical-align: middle;
+}
+
+.events-index-headers {
+    margin-bottom: 20px;
+    padding-bottom: 0;
+}
+
+
+.events-index-headers > h4 {
+    color: #b4b4b4;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.events-index-left-content {
+    max-width: none;
+    justify-content: flex-start;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.events-index-filters {
+    width: 25%;
+    height: 100%;
+    max-width: none;
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: 20px;
+    padding-top: 0;
+    position: sticky;
+    top: 30px;
+}
+
+.events-index-filters > h2 {
+    margin-top: 0;
+}
+
+.form-heading {
+    margin-top: 10px;
+    font-size: 18px;
+    line-height: 24px;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.filter-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-label {
+    margin-left: 10px;
+}
+
+.form-input {
+    height: 25px;
+    margin-right: 5px;
+}
+
+.label-span {
+    cursor: pointer;
+}
+
+.events-index-list {
+    max-width: none;
+    margin-left: 0;
+    margin-right: 0;
+    display: block;
+    width: 75%;
+    margin-top: 40px;
+}
+
+.events-index-list-item {
+    margin-bottom: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+    display: flex;
+}
+
+.events-index-list-item > img {
+    width: 237px;
+    margin-right: 20px;
+    vertical-align: middle;
+}
+
+.events-index-list-item h4 {
+    margin-top: 0px;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.loading {
+    color: red;
+    font-size: 100px;
+}

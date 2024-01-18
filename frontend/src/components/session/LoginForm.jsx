@@ -49,7 +49,7 @@ const LoginForm = () => {
 
                             <input 
                                 className="form-input"
-                                placeholder="Email Address"
+                                placeholder="Email Address or Username"
                                 maxLength="256"
                                 name='Email'
                                 type="email" 
