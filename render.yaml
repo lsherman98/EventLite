@@ -18,6 +18,7 @@ services:
         fromDatabase:
           name: EventLite
           property: connectionString
+      - key: RAILS_ENV
         value: production
       - key: RAILS_MASTER_KEY
         sync: false
