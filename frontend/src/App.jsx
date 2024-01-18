@@ -3,10 +3,10 @@ import Navigation from "./components/Navigation/Navigation";
 import SignUpForm from "./components/session/SignUpForm";
 import LoginForm from "./components/session/LoginForm";
 import HomePage from "./components/HomePage/HomePage";
-import AdminShow from "./components/ShowPages/AdminShow";
-import UserShow from "./components/ShowPages/UserShow"
+import AdminShow from "./components/UserShowPages/AdminShow";
+import UserShow from "./components/UserShowPages/UserShow"
 import LikesIndex from "./components/Likes/LikesIndex";
-import EventsIndex from "./components/EventsIndex/EventsIndex";
+import EventsIndex from "./components/Events/EventsIndex/EventsIndex";
 
 
 

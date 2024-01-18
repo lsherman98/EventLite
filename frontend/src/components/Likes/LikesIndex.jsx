@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import "./LikesIndex.css"
 import { useSelector } from "react-redux"
 import { useEffect } from "react"
@@ -12,15 +12,15 @@ const LikesIndex = () => {
         if (!sessionUser) navigate("/login");
     }, [sessionUser, navigate]);
 
-    const likedEvents = useSelector(state => state.session.user.likes)
+    // const likedEvents = useSelector(state => state.session.user.likes)
 
     return (
         <section>
             <div className="likes-content">
                 <h1>Likes</h1>
-                {likedEvents.map(event => {
+                {/* {likedEvents.map(event => {
                     return <h1>{event.title}</h1>
-                })}
+                })} */}
             </div>
 
         </section>

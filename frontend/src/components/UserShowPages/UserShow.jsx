@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { fetchUser } from "../../store/user"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import { useParams } from "react-router-dom"
 import { Link } from "react-router-dom"
 import "./UserShow.css"
@@ -17,7 +17,7 @@ const UserShow = () => {
         dispatch(fetchUser(userId))
     }, [userId, dispatch])
 
-    const user = useSelector(state => state.profile.user)
+    // const user = useSelector(state => state.profile.user)
 
 
     return (

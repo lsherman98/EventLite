@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
 import "./EventsIndex.css"
 import { useDispatch, useSelector } from "react-redux"
-import { getEvents } from "../../store/events"
+import { getEvents } from "../../../store/events"
 import EventIndexListItem from "./EventIndexListItem"
-import { useParams, useSearchParams } from "react-router-dom"
+import { useSearchParams } from "react-router-dom"
 
 const EventsIndex = () => {
     const dispatch = useDispatch()
@@ -56,7 +56,7 @@ const EventsIndex = () => {
             setCityFilter(city)
         }
         setSearchParams({})
-    }, [dispatch])
+    }, [dispatch, city, setSearchParams])
 
 
     const events = useSelector(state => state.events)

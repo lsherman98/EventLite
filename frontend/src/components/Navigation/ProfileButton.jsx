@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import {logout} from "../../store/session"
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 const ProfileButton = ({ user }) => {
