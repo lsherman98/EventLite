@@ -3,6 +3,7 @@ import {Link} from "react-router-dom"
 
 const HomePage = () => {
 
+
     return (
         <div className="homepage">
             <img className="homepage-banner" src="https://assets-global.website-files.com/65972da33a848ad8e00a649c/65a04606f21bc0db02004a5d_Screenshot%202024-01-11%20at%202.48.03%E2%80%AFPM.png" alt="" />

@@ -27,7 +27,7 @@ const Navigation = () => {
                 <div className='nav-menu'>
                     <div className='nav-links'>
                         <NavLink className='nav-link' to='/events'>Find Events</NavLink>
-                        <NavLink className='nav-link' to='/events/create'>Create Events</NavLink>
+                        <NavLink className='nav-link' to='/create'>Create Events</NavLink>
                     </div>
                     <div className='ticket-button' onClick={() => navigate('/tickets')}>
                         <img className="ticket-icon" width="30" src="https://assets-global.website-files.com/65972da33a848ad8e00a649c/65a482e8390d57d916c9f4e3_ticket.png" alt="" />

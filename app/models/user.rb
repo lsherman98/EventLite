@@ -26,6 +26,7 @@ has_many :bookmarked_events, through: :bookmarks, source: :event
 has_many :registrations
 has_many :registered_events, through: :registrations, source: :event
 
+has_one_attached :photo
 
 
 

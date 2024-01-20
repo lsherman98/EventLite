@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react"
 import "./EventsIndex.css"
 import { useDispatch, useSelector } from "react-redux"
-import { getEvents } from "../../../store/events"
+import { addEvents, getEvents } from "../../../store/events"
 import EventIndexListItem from "./EventIndexListItem"
 import { useSearchParams } from "react-router-dom"
 
+
 const EventsIndex = () => {
     const dispatch = useDispatch()
+
+
 
     
     const [searchParams, setSearchParams] = useSearchParams()
@@ -51,12 +54,25 @@ const EventsIndex = () => {
 
     useEffect(() => {
         window.scrollTo(0, 0)
-        dispatch(getEvents())
+
+        const cachedEvents = localStorage.getItem('cachedEvents') 
+        console.log(cachedEvents)
+        if (cachedEvents) {
+            const parsedEvents = JSON.parse(cachedEvents);
+            dispatch(addEvents(parsedEvents));
+        } else {
+            dispatch(getEvents())
+                .then(events => {
+                localStorage.setItem('cachedEvents', JSON.stringify(events));
+        });
+        }
+
         if (city) {
             setCityFilter(city)
         }
         setSearchParams({})
     }, [dispatch, city, setSearchParams])
+    
 
 
     const events = useSelector(state => state.events)
@@ -118,9 +134,6 @@ const EventsIndex = () => {
             }
         })
 
-    
-
-
 
     return (
         <div className="events-index-main">
@@ -135,11 +148,11 @@ const EventsIndex = () => {
                             <div>
                                 <h4 className="form-heading">Date</h4>
                                 <form className="filter-form" onChange={(e) => setDateFilter(e.target.value)}>
-                                    <label className="form-label"><input defaultChecked className="form-input" type="radio" name="ate" value="all" /><span className="label-span">Any Time</span></label>
+                                    <label className="form-label"><input defaultChecked className="form-input" type="radio" name="date" value="all" /><span className="label-span">Any Time</span></label>
                                     <label className="form-label"><input className="form-input" type="radio" name="date" value="today" /><span className="label-span">Today</span></label>
                                     <label className="form-label"><input className="form-input" type="radio" name="date" value="tomorrow" /><span className="label-span">Tomorrow</span></label>
                                     <label className="form-label"><input className="form-input" type="radio" name="date" value="weekend" /><span className="label-span">This Weekend</span></label>
-                                    <label className="form-label"><input className="form-input" type="radio" name="date" value="date" /><span className="label-span">Select Date</span></label>
+                                    {/* <label className="form-label"><input className="form-input" type="radio" name="date" value="date" /><span className="label-span">Select Date</span></label> */}
                                 </form>
                             </div>
                             <div>
@@ -156,7 +169,7 @@ const EventsIndex = () => {
                             <div>
                                 <h4 className="form-heading">City</h4>
                                 <form className="filter-form" onChange={e => setCityFilter(e.target.value)}>
-                                    <label className="form-label"><input defaultChecked={city === 'all'} className="form-input" type="radio" name="date" value="all" /><span className="label-span">All Cities</span></label>
+                                    <label className="form-label"><input defaultChecked={cityFilter === 'all'} className="form-input" type="radio" name="date" value="all" /><span className="label-span">All Cities</span></label>
                                     <label className="form-label"><input defaultChecked={city === 'New York'} className="form-input" type="radio" name="date" value="New York" /><span className="label-span">New York</span></label>
                                     <label className="form-label"><input defaultChecked={city === 'Miami'} className="form-input" type="radio" name="date" value="Miami" /><span className="label-span">Miami</span></label>
                                     <label className="form-label"><input defaultChecked={city === 'Philadelphia'} className="form-input" type="radio" name="date" value="Philadelphia" /><span className="label-span">Philadelphia</span></label>

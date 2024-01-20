@@ -1,0 +1,114 @@
+
+.ticket-index-section {
+    border-bottom: 2px solid rgba(59, 83, 172, .18);
+    align-items: flex-start;
+    margin-top: 70px;
+    padding-bottom: 30px;
+    display: flex;
+}
+
+.tickets-header {
+    /* width: 20%; */
+    /* max-width: 250px; */
+    align-self: auto;
+    margin-left: 80px;
+    position: sticky;
+    top: 20px;
+}
+
+.tickets-header > h1 {
+    color: #645bcc;
+    margin-top: 20px;
+    font-size: 2.6rem;
+    padding-right: 40px;
+}
+
+.tickets-container {
+    width: 60%;
+    /* height: 100%; */
+    /* flex-wrap: wrap; */
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin-left: 50px;
+    margin-right: 50px;
+    padding-top: 0;
+    display: flex;
+}
+
+
+.tickets-component {
+    border-radius: 16px;
+    margin-bottom: 20px;
+    padding: 30px 30px 13px;
+    box-shadow: 1px 2px 5px -2px rgba(0, 0, 0, .2); 
+    width: 100%;
+}
+
+.tickets-component:hover {
+    background-color: #e8e8e8;
+    cursor: pointer;
+}
+
+.tickets-component > a {
+    width: 100%;
+    justify-content: space-between;
+    text-decoration: none;
+    display: flex;
+}
+
+.price {
+    margin-top: 75px;
+    font-size: 24px;
+}
+
+.tickets-component-details > h2 {
+    color: #685acf;
+    margin-top: 0;
+    margin-bottom: 5px;
+    font-family: Lato, sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.tickets-component-details > h3 {
+    color: #dc7048;
+    margin-top: 0;
+    margin-bottom: 5px;
+    font-size: 20px;
+}
+
+.tickets-component-details > p {
+    color: #8a69b7;
+    font-family: Lato, sans-serif;
+    font-weight: 700;
+}
+
+.tickets-component-graphics {
+    flex-direction: column;
+    align-items: flex-end;
+    display: flex;
+}
+
+.tickets-component-img {
+    width: 256px;
+    max-width: 100%;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.tickets-component-button {
+    width: 30px;
+    border: 1px solid #cacaca;
+    border-radius: 63px;
+    margin-top: 10px;
+    margin-right: 0;
+    padding: 10px;
+}
+
+.tickets-component-button:hover {
+    background-color: #7fb7ff;
+}
+
+

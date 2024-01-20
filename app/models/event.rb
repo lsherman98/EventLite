@@ -8,8 +8,6 @@ class Event < ApplicationRecord
     # validate :valid_date, on: :create
 
 
-
-
     belongs_to :organizer,
       foreign_key: :user_id,
       class_name: :User
@@ -21,7 +19,7 @@ class Event < ApplicationRecord
     has_many :registrations
     has_many :registered_users, through: :registrations, source: :user
 
-
+    has_one_attached :photo
 
 
 

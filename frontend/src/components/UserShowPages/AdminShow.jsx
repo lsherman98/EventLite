@@ -28,7 +28,7 @@ const AdminShow = () => {
                     <p>num orders | num likes</p>
                 </div>
             </div>
-            <container className="profile-content-container">
+            <div className="profile-content-container">
                 <div className="profile-module">
                     <h1>Tickets</h1>
                     <div>
@@ -54,9 +54,7 @@ const AdminShow = () => {
                     </div>
                 </div>
 
-            </container>
-
-
+            </div>
         </section>
     )
 

@@ -1,16 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit"
+import { csrfFetch } from "./csrf"
 
 
 export const getEvents = () => async dispatch => {
-    const response = await fetch("/api/events")
+    const response = await csrfFetch("/api/events")
     let data = await response.json()
     if (response.ok){
         dispatch(addEvents(data))
+        return data
     }
 }
 
 export const getEvent = (eventId) => async dispatch => {
-    const response = await fetch(`/api/events/${eventId}`)
+    const response = await csrfFetch(`/api/events/${eventId}`)
     let data = await response.json()
     if (response.ok) {
         dispatch(addEvent(data))
@@ -18,7 +20,7 @@ export const getEvent = (eventId) => async dispatch => {
 }
 
 export const createEvent = (event) => async dispatch => {
-    const response = await fetch("/api/events", {
+    const response = await csrfFetch("/api/events", {
         method: "POST",
         body: JSON.stringify(event),
         headers: {
@@ -29,12 +31,12 @@ export const createEvent = (event) => async dispatch => {
     if (response.ok) {
         dispatch(addEvent(data))
     } else {
-        return data.errors
+        return data
     }
 }
 
 export const updateEvent = (event) => async dispatch => {
-    const response = await fetch(`/api/events/${event.id}`, {
+    const response = await csrfFetch(`/api/events/${event.id}`, {
         method: "PUT",
         body: JSON.stringify(event),
         headers: {
@@ -50,7 +52,7 @@ export const updateEvent = (event) => async dispatch => {
 }
 
 export const deleteEvent = (eventId) => async dispatch => {
-    const response = await fetch(`api/events/${eventId}`, {
+    const response = await csrfFetch(`api/events/${eventId}`, {
         method: "DELETE"
     })
     if (response.ok) {

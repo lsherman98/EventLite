@@ -76,9 +76,9 @@ ApplicationRecord.transaction do
   end
 
   puts "Registering users..."
-  500.times do |i|
-    50.times do |j|
-      Registration.create!(event_id: i + 1, user_id: j + 1)
+  50.times do |i|
+    20.times do |j|
+      Registration.create!(event_id: j + 1, user_id: i + 1)
     end
   end
 

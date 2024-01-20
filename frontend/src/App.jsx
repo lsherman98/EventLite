@@ -7,7 +7,8 @@ import AdminShow from "./components/UserShowPages/AdminShow";
 import UserShow from "./components/UserShowPages/UserShow"
 import LikesIndex from "./components/Likes/LikesIndex";
 import EventsIndex from "./components/Events/EventsIndex/EventsIndex";
-
+import CreateEvent from "./components/Events/CreateEvent/CreateEvent";
+import TicketIndex from "./components/Tickets/TicketsIndex";
 
 
 
@@ -55,8 +56,12 @@ const router = createBrowserRouter([
       },
       {
         path: '/tickets',
-        element: <h1>tickets</h1>
+        element: <TicketIndex />
       },
+      {
+        path: '/create',
+        element: <CreateEvent />
+      }
      
     ]
   }
