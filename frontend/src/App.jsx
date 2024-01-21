@@ -9,6 +9,7 @@ import LikesIndex from "./components/Likes/LikesIndex";
 import EventsIndex from "./components/Events/EventsIndex/EventsIndex";
 import CreateEvent from "./components/Events/CreateEvent/CreateEvent";
 import TicketIndex from "./components/Tickets/TicketsIndex";
+import EventGenericShow from "./components/Events/EventShow/EventGenericShow";
 
 
 
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
       {
         path: '/events',
         element: <EventsIndex />
+      },
+      {
+        path: '/events/:eventId',
+        element: <EventGenericShow />
       },
       {
         path: '/tickets',

@@ -52,6 +52,26 @@ export const logout = () => async (dispatch) => {
     }
 };
 
+export const register = ({user_id, event_id, quantity}) => async dispatch => {
+    const response = await csrfFetch('/api/registrations', {
+        method: "POST",
+        body: JSON.stringify({
+            registration: {
+                user_id,
+                event_id,
+                quantity
+            }
+        }),
+        headers: {
+            "content-type": "application/json"
+        }
+    })
+    const data = await response.json();
+    if (response.ok) {
+        dispatch(loginUser(data.user));
+        sessionStorage.setItem('currentUser', JSON.stringify(data.user));
+    }
+}
 
 
 

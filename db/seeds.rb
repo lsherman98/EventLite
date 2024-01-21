@@ -7,10 +7,21 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 ApplicationRecord.transaction do
+  def generate_time_within_range
+    start_time = Time.parse('5:00 PM')
+    end_time = Time.parse('11:00 PM')
+
+    random_time = Faker::Time.between_dates(from: start_time, to: end_time, period: :day)
+    formatted_time = random_time.strftime('%H:%M')
+
+    formatted_time
+  end
+
+
   puts "Destroying tables..."
   # Unnecessary if using `rails db:seed:replant`
-  Registration.destroy_all
-  Bookmark.destroy_all
+  # Registration.destroy_all
+  # Bookmark.destroy_all
   Event.destroy_all
   User.destroy_all
 
@@ -62,7 +73,7 @@ ApplicationRecord.transaction do
       city: cities.sample,
       date: Faker::Date.between(from: 1.months.ago, to: 6.months.from_now),
       address: Faker::Address.street_address,
-      start_time: "9:00 PM",
+      start_time: generate_time_within_range,
       age_limit: bool.sample,
       venue: Faker::Restaurant.name
     })
@@ -78,11 +89,15 @@ ApplicationRecord.transaction do
   puts "Registering users..."
   50.times do |i|
     20.times do |j|
-      Registration.create!(event_id: j + 1, user_id: i + 1)
+      Registration.create!(event_id: j + 1, user_id: i + 1, quantity: 1)
     end
   end
 
 
 
   puts "Done!"
+
+
+
+
 end

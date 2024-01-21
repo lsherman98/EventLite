@@ -39,6 +39,7 @@
     font-size: 24px;
 }
 
+
 .likes-event-component-details > h2 {
     color: #685acf;
     margin-top: 0;
@@ -52,14 +53,31 @@
 .likes-event-component-details > h3 {
     color: #dc7048;
     margin-top: 0;
-    margin-bottom: 5px;
-    font-size: 20px;
+    margin-bottom: 70px;
+    font-size: 18px;
 }
 
 .likes-event-component-details > p {
     color: #8a69b7;
     font-family: Lato, sans-serif;
     font-weight: 700;
+    margin-bottom: 3px;
+}
+
+.likes-event-component-details > p > span {
+    background-color: #dc7048;
+    color: white;
+    padding: 4px;
+    border-radius: 5px;
+}
+
+.likes-event-component-details > p > a {
+    color: #dc7048;
+    text-decoration: none;
+}
+
+.likes-event-component-details > p > a:hover {
+    text-decoration: underline;
 }
 
 .likes-event-component-graphics {

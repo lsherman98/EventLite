@@ -13,10 +13,10 @@ class Event < ApplicationRecord
       class_name: :User
 
 
-    has_many :bookmarks
+    has_many :bookmarks, dependent: :destroy
     has_many :bookmarking_users, through: :bookmarks, source: :user
 
-    has_many :registrations
+    has_many :registrations, dependent: :destroy
     has_many :registered_users, through: :registrations, source: :user
 
     has_one_attached :photo

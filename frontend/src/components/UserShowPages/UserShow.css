@@ -138,8 +138,8 @@
     line-height: 44px;
 }
 
-.user-events-header > a {
-    color: #001471;
+.user-events-button {
+    color: #f19328;
     border: 3px solid #d3d3d3;
     border-radius: 12px;
     margin: 15px 26px 15px 0px;
@@ -163,6 +163,10 @@
     display: flex;
 }
 
+.user-events > a {
+    text-decoration: none;
+}
+
 .user-show-event-component {
     width: 22rem;
     height: auto;
@@ -177,6 +181,10 @@
     padding-right: 0;
     overflow: hidden;
     box-shadow: 2px 3px 7px rgba(0, 0, 0, .2);
+}
+
+.user-show-event-component:hover {
+    transform: scale(1.01);
 }
 
 .user-show-event-component > img {
@@ -204,6 +212,10 @@
     left: 270px;
 }
 
+.user-show-event-like-button:hover {
+    background-color: #7fb7ff;
+}
+
 .user-show-event-like-button > img {
     width: 25px;
     max-width: 100%;
@@ -216,10 +228,38 @@
     padding-right: 15px;
 }
 
-.user-show-event-details > h3 {
+.user-show-event-details > h2 {
     color: #8469a0;
     text-align: left;
-    margin-top: -15px;
-    font-size: 16px;
+    margin-top: -25px;
+    font-size: 18px;
+    font-family: Lato, sans-serif;
+    font-weight: 700;
+    text-decoration: none;
+    margin-bottom: 2px;
 }
     
+.user-show-event-details > h3 {
+   color: #dc7048;
+   font-family: Lato, sans-serif;
+   font-weight: 700;
+   margin-bottom: 10px;
+   font-size: 16;
+   
+}
+
+.user-show-event-details > p {
+   color: #8a69b7; 
+   font-family: Lato, sans-serif;
+   font-weight: 700;
+   font-size: 12;
+   margin-bottom: 3px;
+}
+
+.user-show-event-details > p > span{
+    background-color: #dc7048;
+    color: white;
+    padding: 4px;
+    border-radius: 5px;
+    font-size: 10px;
+}

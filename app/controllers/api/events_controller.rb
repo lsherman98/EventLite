@@ -2,11 +2,11 @@ class Api::EventsController < ApplicationController
 
 
   def show
-    @event = Event.find(params[:id])
+    @event = Event.find_by(id: params[:id])
     if @event
         render :show
     else
-      render json: {event: nil}
+      render json: { error: 'Event not found' }, status: :not_found
     end
   end
 
@@ -33,7 +33,7 @@ class Api::EventsController < ApplicationController
     @event = Event.find(params[:id])
 
     if @event && @event.user_id == current_user.id
-      @event.delete
+      @event.destroy!
       head :no_content
     end
   end

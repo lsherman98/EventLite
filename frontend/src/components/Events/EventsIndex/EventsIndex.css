@@ -137,12 +137,14 @@
 
 .events-index-item-details {
     width: 50%;
+    display: flex;
+    flex-direction: column;
 }
 
 .events-index-item-details > h2 {
     color: #685acf;
     margin-top: 0;
-    margin-bottom: 5px;
+    margin-bottom: 0px;
     font-family: Lato, sans-serif;
     font-size: 24px;
     font-weight: 700;
@@ -152,14 +154,34 @@
 .events-index-item-details > h3 {
     color: #dc7048;
     margin-top: 0;
-    margin-bottom: 5px;
-    font-size: 20px;
+    margin-bottom: 50px;
+    font-size: 18px;
 }
 
 .events-index-item-details > p {
     color: #8a69b7;
     font-family: Lato, sans-serif;
     font-weight: 700;
+    justify-self: end;
+    margin-bottom: 3px;
+}
+
+.events-index-item-details > p > span {
+    background-color: #dc7048;
+    color: white;
+    padding: 4px;
+    border-radius: 5px;
+    font-size: 10px;
+}
+
+.events-index-item-details > p > a {
+    color: #dc7048;
+    text-decoration: none;
+}
+
+
+.events-index-item-details > p > a:hover {
+    text-decoration: underline;
 }
 
 

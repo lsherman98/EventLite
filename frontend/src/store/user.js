@@ -4,9 +4,12 @@ import { csrfFetch } from './csrf';
 export const fetchUser = userId => async dispatch => {
     const response = await csrfFetch(`/api/users/${userId}`)
     const data = await response.json()
-    dispatch(setUser(data.user))
-    return response
+    if (response.ok) {
+        dispatch(setUser(data.user))
+        return data
+    }
 }
+
 
 const userProfileReducer = createSlice({
     name: 'profile',

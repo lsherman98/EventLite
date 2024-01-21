@@ -14,6 +14,8 @@
     display: flex;
     justify-content: space-around;
     padding-bottom: 20px;
+    padding-right: 10vw;
+    padding-left: 10vw;
 }
 
 .category-link-block {
@@ -24,7 +26,7 @@
     text-decoration: none;
     display: flex;
     border-radius: 40px;
-
+    margin-left: 20px;
 }
 
 .category-link-block:hover .category-link-image {

@@ -7,7 +7,7 @@ const store = configureStore({
     reducer: {
         session: sessionReducer,
         profile: userProfileReducer,
-        events: eventReducer
+        events: eventReducer,
     },
     devTools: process.env.NODE_ENV !== 'production',
 });

@@ -75,7 +75,7 @@
 .tickets-component-details > h3 {
     color: #dc7048;
     margin-top: 0;
-    margin-bottom: 5px;
+    margin-bottom: 70px;
     font-size: 20px;
 }
 
@@ -84,6 +84,24 @@
     font-family: Lato, sans-serif;
     font-weight: 700;
 }
+
+.tickets-component-details > p > span {
+    background-color: #dc7048;
+    color: white;
+    padding: 4px;
+    border-radius: 5px;
+    font-size: 10px;
+}
+
+.tickets-component-details > p > a {
+   color: #dc7048;
+    text-decoration: none;
+}
+
+.tickets-component-details > p > a:hover {
+   text-decoration: underline;
+}
+
 
 .tickets-component-graphics {
     flex-direction: column;

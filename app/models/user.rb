@@ -20,10 +20,10 @@ has_many :organized_events,
   class_name: :Event
 
 
-has_many :bookmarks
+has_many :bookmarks, dependent: :destroy
 has_many :bookmarked_events, through: :bookmarks, source: :event
 
-has_many :registrations
+has_many :registrations, dependent: :destroy
 has_many :registered_events, through: :registrations, source: :event
 
 has_one_attached :photo

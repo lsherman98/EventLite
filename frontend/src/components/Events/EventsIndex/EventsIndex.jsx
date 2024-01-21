@@ -9,18 +9,13 @@ import { useSearchParams } from "react-router-dom"
 const EventsIndex = () => {
     const dispatch = useDispatch()
 
-
-
-    
     const [searchParams, setSearchParams] = useSearchParams()
     const category = searchParams.get('category')
     const city = searchParams.get('city')
 
-
     const [dateFilter, setDateFilter] = useState('all')
     const [priceFilter, setPriceFilter] = useState('all')
     const [cityFilter, setCityFilter] = useState('all')
-
 
     const [allCategoriesChecked, setAllCategoriesChecked] = useState(true)
     const [hobbiesChecked, setHobbiesChecked] = useState(category === 'Hobbies' || false)
@@ -56,15 +51,11 @@ const EventsIndex = () => {
         window.scrollTo(0, 0)
 
         const cachedEvents = localStorage.getItem('cachedEvents') 
-        console.log(cachedEvents)
         if (cachedEvents) {
             const parsedEvents = JSON.parse(cachedEvents);
             dispatch(addEvents(parsedEvents));
         } else {
             dispatch(getEvents())
-                .then(events => {
-                localStorage.setItem('cachedEvents', JSON.stringify(events));
-        });
         }
 
         if (city) {
@@ -76,63 +67,67 @@ const EventsIndex = () => {
 
 
     const events = useSelector(state => state.events)
-    const filteredEvents = Object.values(events)
-        .filter((event) => {
-            if (event.price > 0 && priceFilter === 'paid') {
-                return event
-            } else if (event.price === 0 && priceFilter === 'free') {
-                return event
-            } else if (priceFilter === 'all'){
-                return event
-            }
-        })
-        .filter((event) => {
-            if (allCategoriesChecked) {
-                return event
-            } else if (event.category === 'Hobbies' && hobbiesChecked) {
-                return event
-            } else if (event.category === 'Night Life' && nightLifeChecked) {
-                return event
-            } else if (event.category === 'Music' && musicChecked) {
-                return event
-            } else if (event.category === 'Food' && foodChecked) {
-                return event
-            } else if (event.category === 'Performing arts' && performingArtsChecked) {
-                return event
-            }
-        })
-        .filter((event) => {
-            if (event.city === cityFilter || cityFilter === 'all') {
-                return event
-            } 
-        })
-        .filter((event) => {
-            const currentDate = new Date()
-            const eventDate = new Date(event.date)
-
-            switch (dateFilter) {
-                case 'today':
-                    return eventDate.toDateString() === currentDate.toDateString()
-                case 'tomorrow': {
-                    const tomorrow = new Date();
-                    tomorrow.setDate(currentDate.getDate() + 1);
-                    return eventDate.toDateString() === tomorrow.toDateString();
-                }
-                case 'weekend': {
-                    const dayOfWeek = currentDate.getDay();
-                    const daysUntilWeekend = dayOfWeek === 6 ? 0 : 6 - dayOfWeek;
-                    const weekendStartDate = new Date(currentDate);
-                    weekendStartDate.setDate(currentDate.getDate() + daysUntilWeekend);
-                    const weekendEndDate = new Date(weekendStartDate);
-                    weekendEndDate.setDate(weekendStartDate.getDate() + 1);
-                    return (
-                        eventDate >= weekendStartDate && eventDate < weekendEndDate
-                    );
-                }
-                default: 
+    let filteredEvents = []
+    if (events) {
+         filteredEvents = Object.values(events)
+            .filter((event) => {
+                if (event.price > 0 && priceFilter === 'paid') {
                     return event
-            }
-        })
+                } else if (event.price === 0 && priceFilter === 'free') {
+                    return event
+                } else if (priceFilter === 'all'){
+                    return event
+                }
+            })
+            .filter((event) => {
+                if (allCategoriesChecked) {
+                    return event
+                } else if (event.category === 'Hobbies' && hobbiesChecked) {
+                    return event
+                } else if (event.category === 'Night Life' && nightLifeChecked) {
+                    return event
+                } else if (event.category === 'Music' && musicChecked) {
+                    return event
+                } else if (event.category === 'Food' && foodChecked) {
+                    return event
+                } else if (event.category === 'Performing arts' && performingArtsChecked) {
+                    return event
+                }
+            })
+            .filter((event) => {
+                if (event.city === cityFilter || cityFilter === 'all') {
+                    return event
+                } 
+            })
+            .filter((event) => {
+                const currentDate = new Date()
+                const eventDate = new Date(event.date)
+
+                switch (dateFilter) {
+                    case 'today':
+                        return eventDate.toDateString() === currentDate.toDateString()
+                    case 'tomorrow': {
+                        const tomorrow = new Date();
+                        tomorrow.setDate(currentDate.getDate() + 1);
+                        return eventDate.toDateString() === tomorrow.toDateString();
+                    }
+                    case 'weekend': {
+                        const dayOfWeek = currentDate.getDay();
+                        const daysUntilWeekend = dayOfWeek === 6 ? 0 : 6 - dayOfWeek;
+                        const weekendStartDate = new Date(currentDate);
+                        weekendStartDate.setDate(currentDate.getDate() + daysUntilWeekend);
+                        const weekendEndDate = new Date(weekendStartDate);
+                        weekendEndDate.setDate(weekendStartDate.getDate() + 1);
+                        return (
+                            eventDate >= weekendStartDate && eventDate < weekendEndDate
+                        );
+                    }
+                    default: 
+                        return event
+                }
+            })
+        }
+    
 
 
     return (
@@ -190,7 +185,7 @@ const EventsIndex = () => {
 
                     <div className="events-index-list">
                         {filteredEvents.map((event) => {
-                            return <EventIndexListItem key={event.id} event={event}/>
+                            return <EventIndexListItem key={event.id} event={event} />
                         })}
                     </div>
                 </div>
