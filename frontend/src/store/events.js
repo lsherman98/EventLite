@@ -72,7 +72,7 @@ const eventReducer = createSlice({
         addEvents: (state, action) => {
            return {...action.payload}
         },
-        removeEvent: (state, action) => {
+        removeEvent: () => {
             return {}
         }
 

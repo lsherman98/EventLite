@@ -8,12 +8,13 @@
 }
 
 .tickets-header {
-    /* width: 20%; */
+    width: 20%;
     /* max-width: 250px; */
     align-self: auto;
     margin-left: 80px;
     position: sticky;
     top: 20px;
+
 }
 
 .tickets-header > h1 {
@@ -31,9 +32,10 @@
     justify-content: center;
     align-items: flex-start;
     margin-left: 50px;
-    margin-right: 50px;
+    margin-right: 200px;
     padding-top: 0;
     display: flex;
+
 }
 
 
@@ -42,7 +44,7 @@
     margin-bottom: 20px;
     padding: 30px 30px 13px;
     box-shadow: 1px 2px 5px -2px rgba(0, 0, 0, .2); 
-    width: 100%;
+    width: 70%;
 }
 
 .tickets-component:hover {

@@ -24,23 +24,26 @@ const TicketIndex = () => {
 
     let tickets = []
     if (user) {
-        tickets = user.likes
+        tickets = user.tickets
     }
 
     const currentDate = new Date()
 
     const isUpcoming = (ticket) => {
-        const ticketDateTime = new Date(`${ticket.date} ${ticket.start_time}`);
+        const ticketDateTime = new Date(ticket.date);
         return ticketDateTime > currentDate;
     };
 
     const isPast = (ticket) => {
-        const ticketDateTime = new Date(`${ticket.date} ${ticket.startTime}`);
+        const ticketDateTime = new Date(ticket.date);
         return ticketDateTime < currentDate;
     };
 
-    const futureTickets = tickets.filter(isUpcoming) 
-    const pastTickets = tickets.filter(isPast)
+    const futureTickets = tickets.filter(ticket => isUpcoming(ticket)) 
+    const pastTickets = tickets.filter(ticket => isPast(ticket))
+
+    console.log(futureTickets)
+    console.log(pastTickets)
 
 
     return (

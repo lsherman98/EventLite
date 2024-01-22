@@ -4,7 +4,7 @@ import EventAttendee from "./EventAttendee";
 import { useState } from "react";
 import EventEdit from "./EventEdit";
 import { useDispatch } from "react-redux";
-import { deleteEvent, getEvents } from "../../../store/events";
+import { deleteEvent } from "../../../store/events";
 
 const EventAdminShow = ({event}) => {
     const dispatch = useDispatch()
