@@ -7,10 +7,11 @@
 #   Character.create(name: "Luke", movie: movies.first)
 require "open-uri"
 
-json_data = JSON.parse(File.read("/Users/levisherman/Documents/App-Academy/EventLite/db/master_events.json"))
+json_data = JSON.parse(File.read("db/master_events.json"))
 seed_events = json_data['events']
 seed_users = json_data['users']
-
+print json_data
+return
 
 
 # ApplicationRecord.transaction do
