@@ -52,7 +52,7 @@ const LoginForm = () => {
                                 placeholder="Email Address or Username"
                                 maxLength="256"
                                 name='Email'
-                                type="email" 
+                                type="text" 
                                 value={credential} 
                                 onChange={(e) => setCredential(e.target.value)}
                                 required
@@ -74,13 +74,17 @@ const LoginForm = () => {
                                     type="submit"
                                     className="form-submit-button"
                                     value="Demo Login" 
+                                    onClick={() => {
+                                    setCredential('demo@user.io')
+                                    setPassword('password')
+                                }}
                                 />
 
-                                <input 
-                                    type="submit"
-                                    className="form-submit-button"
-                                    value="Login" 
-                                />
+                            <input 
+                                type="submit"
+                                className="form-submit-button"
+                                value="Login" 
+                            />
                             </div>
                         </form>
                     </div>

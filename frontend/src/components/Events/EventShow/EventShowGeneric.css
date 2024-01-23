@@ -186,11 +186,11 @@
     border-radius: 0;
     padding: 9px 15px;
     text-decoration: none;
-    height: 30px;
+    height: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 35%;
+    width: 45%;
 }
 
 .purchase-button:hover {

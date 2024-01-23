@@ -5,15 +5,32 @@ import { Link } from "react-router-dom";
 
 const EventIndexListItem = ({ event }) => {
 
+
+    function convertToRegularTime(time24) {
+        const [hour, minute] = time24.split(':');
+        const parsedHour = parseInt(hour, 10);
+        let period = 'AM';
+        let regularHour = parsedHour;
+        if (parsedHour >= 12) {
+            period = 'PM';
+            if (parsedHour > 12) {
+            regularHour = parsedHour - 12;
+            }
+        }
+        return `${regularHour}:${minute} ${period}`;
+    }
+
+    const regularTime = convertToRegularTime(event.startTime);
+
     const formattedDate = new Date(event.date).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
 
     return (
         <Link to={`/events/${event.id}`}>
             <div className="events-index-list-item">
-                <img className="events-index-item-banner" src="https://assets-global.website-files.com/65972da33a848ad8e00a649c/65a6b8425853c6c178a1ea62_https___cdn.evbuc.com_images_646054859_1440127062743_1_original.jpeg" alt="" />
+                <img className="events-index-item-banner" src={event.imageUrl} alt="" />
                 <div className="events-index-item-details">
                     <h2>{event.title.toUpperCase()}</h2>
-                    <h3>{`${formattedDate}, ${event.startTime}`}</h3>
+                    <h3>{`${formattedDate}, ${regularTime}`}</h3>
                     <p>Organized by <Link to={`/users/${event.userId}`}>{event.organizer}</Link></p>
                     <p>{`${event.venue}, ${event.city}`}</p>
                     <p>{`Starts at $${event.price}`}     |     <span>{event.category}</span></p>

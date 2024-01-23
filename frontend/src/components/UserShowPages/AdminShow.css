@@ -1,9 +1,9 @@
 .admin-show-main {
     display: flex;
-    flex-direction: column;
     align-items: stretch;
     justify-content: start;
     margin-top: 80px;
+    
 }
 
 .profile-details-header {
@@ -13,7 +13,32 @@
     padding-left: 155px;
     position: sticky;
     top: 40px;
-    padding-right: 0;
+    padding-right: 50px;
+    
+}
+
+.edit-profile-form-div {
+    position: relative;
+    width: 10%;
+    margin-top: 25px;
+}
+
+.edit-profile-form {
+    display: flex;
+    flex-direction: column;
+    grid-row-gap: 5px;
+}
+
+.edit-profile-form > input {
+    height: 20px;
+}
+
+.edit-profile-form > button {
+    height: 25px;
+    width: 100%;
+    background-color: #cfcfcf;
+    border: rgb(118, 118, 118) solid 1px;
+    color: rgb(59, 59, 59);
 }
 
 .profile-photo {
@@ -21,17 +46,27 @@
     border-radius: 70px;
     align-self: center;
     margin-right: 30px;
-    padding: 35px;
     box-shadow: 0 4px 11px 6px rgba(146, 146, 146, .2);
+    overflow: hidden;
+    max-width: 120px;
+    max-height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .profile-photo > img {
+    width: 120px;
     margin: 0;
+    /* vertical-align: middle ; */
 }
 
 .profile-details-text {
     align-self: center;
     color: #4f228a;
+    max-width: 200px; /* Set the maximum width to your desired value */
+    word-wrap: break-word; /* Break words onto the next line if they exceed the width */
+    white-space: normal;
 }
 
 .profile-details > h1 {
@@ -41,14 +76,19 @@
     line-height: 44px;
 }
 
+.profile-details-text > button {
+    margin-top: 5px;
+}
+
 .profile-content-container {
     width: 60%;
     align-self: flex-end;
     margin-left: 0px;
-    padding-right: 60px;
+    /* padding-right: 60px; */
     padding-left: 60px;
     display: block;
     margin-bottom: 30px;
+    margin-top: 30px;
 }
 
 .profile-module {
@@ -57,12 +97,20 @@
 
 }
 
-.profile-module > h1 {
+.profile-module > a > h1 {
     color: #706d7f;
     margin-bottom: 30px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 25px;
     font-weight: 400;
+}
+
+.profile-module > a {
+    text-decoration: none;
+}
+
+.profile-module > a > h1:hover {
+    color: #090df2;
 }
 
 .profile-module > div {

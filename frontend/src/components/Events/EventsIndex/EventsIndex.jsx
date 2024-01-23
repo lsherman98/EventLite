@@ -46,14 +46,27 @@ const EventsIndex = () => {
             setAllCategoriesChecked(false)
         }
     }
+    const events = useSelector(state => state.events)
 
     useEffect(() => {
         window.scrollTo(0, 0)
 
+
         const cachedEvents = localStorage.getItem('cachedEvents') 
+
         if (cachedEvents) {
-            const parsedEvents = JSON.parse(cachedEvents);
-            dispatch(addEvents(parsedEvents));
+            const cachedEventsArray = JSON.parse(cachedEvents);
+            console.log(cachedEventsArray[0]['imageUrl'])
+            fetch(cachedEventsArray[0]['imageUrl'])
+                .then(res => {
+                    console.log(res)
+                    if (!res.ok) {
+                        localStorage.clear()
+                        dispatch(getEvents())
+                    } else {
+                        dispatch(addEvents(cachedEventsArray))
+                    }  
+                })
         } else {
             dispatch(getEvents())
         }
@@ -66,7 +79,6 @@ const EventsIndex = () => {
     
 
 
-    const events = useSelector(state => state.events)
     let filteredEvents = []
     if (events) {
          filteredEvents = Object.values(events)
@@ -141,43 +153,43 @@ const EventsIndex = () => {
                     <div className="events-index-filters">
                         <div>
                             <div>
-                                <h4 className="form-heading">Date</h4>
+                                <h4 className="filter-form-heading">Date</h4>
                                 <form className="filter-form" onChange={(e) => setDateFilter(e.target.value)}>
-                                    <label className="form-label"><input defaultChecked className="form-input" type="radio" name="date" value="all" /><span className="label-span">Any Time</span></label>
-                                    <label className="form-label"><input className="form-input" type="radio" name="date" value="today" /><span className="label-span">Today</span></label>
-                                    <label className="form-label"><input className="form-input" type="radio" name="date" value="tomorrow" /><span className="label-span">Tomorrow</span></label>
-                                    <label className="form-label"><input className="form-input" type="radio" name="date" value="weekend" /><span className="label-span">This Weekend</span></label>
-                                    {/* <label className="form-label"><input className="form-input" type="radio" name="date" value="date" /><span className="label-span">Select Date</span></label> */}
+                                    <label className="filter-form-label"><input defaultChecked className="filter-form-input" type="radio" name="date" value="all" /><span className="label-span">Any Time</span></label>
+                                    <label className="filter-form-label"><input className="filter-form-input" type="radio" name="date" value="today" /><span className="label-span">Today</span></label>
+                                    <label className="filter-form-label"><input className="filter-form-input" type="radio" name="date" value="tomorrow" /><span className="label-span">Tomorrow</span></label>
+                                    <label className="filter-form-label"><input className="filter-form-input" type="radio" name="date" value="weekend" /><span className="label-span">This Weekend</span></label>
+                                    {/* <label className="filter-form-label"><input className="filter-form-input" type="radio" name="date" value="date" /><span className="label-span">Select Date</span></label> */}
                                 </form>
                             </div>
                             <div>
-                                <h4 className="form-heading">Category</h4>
+                                <h4 className="filter-form-heading">Category</h4>
                                 <form className="filter-form">
-                                    <label className="form-label"><input onChange={handleCheckAll} checked={allCategoriesChecked} className="form-input" type="checkbox" name="date" value="all" /><span className="label-span">All</span></label>
-                                    <label className="form-label"><input onChange={() => setHobbiesChecked(!hobbiesChecked)} checked={hobbiesChecked} className="form-input" type="checkbox" name="date" value="Hobbies" /><span className="label-span">Hobbies</span></label>
-                                    <label className="form-label"><input onChange={() => setNightLifeChecked(!nightLifeChecked)} checked={nightLifeChecked} className="form-input" type="checkbox" name="date" value="Night Life" /><span className="label-span">Night Life</span></label>
-                                    <label className="form-label"><input onChange={() => setMusicChecked(!musicChecked)} checked={musicChecked} className="form-input" type="checkbox" name="date" value="Music" /><span className="label-span">Music</span></label>
-                                    <label className="form-label"><input onChange={() => setFoodChecked(!foodChecked)} checked={foodChecked} className="form-input" type="checkbox" name="date" value="Food" /><span className="label-span">Food</span></label>
-                                    <label className="form-label"><input onChange={() => setPerformingArtsChecked(!performingArtsChecked)} checked={performingArtsChecked} className="form-input" type="checkbox" name="date" value="Performing Arts" /><span className="label-span">Performing Arts</span></label>
+                                    <label className="filter-form-label"><input onChange={handleCheckAll} checked={allCategoriesChecked} className="filter-form-input" type="checkbox" name="date" value="all" /><span className="label-span">All</span></label>
+                                    <label className="filter-form-label"><input onChange={() => setHobbiesChecked(!hobbiesChecked)} checked={hobbiesChecked} className="filter-form-input" type="checkbox" name="date" value="Hobbies" /><span className="label-span">Hobbies</span></label>
+                                    <label className="filter-form-label"><input onChange={() => setNightLifeChecked(!nightLifeChecked)} checked={nightLifeChecked} className="filter-form-input" type="checkbox" name="date" value="Night Life" /><span className="label-span">Night Life</span></label>
+                                    <label className="filter-form-label"><input onChange={() => setMusicChecked(!musicChecked)} checked={musicChecked} className="filter-form-input" type="checkbox" name="date" value="Music" /><span className="label-span">Music</span></label>
+                                    <label className="filter-form-label"><input onChange={() => setFoodChecked(!foodChecked)} checked={foodChecked} className="filter-form-input" type="checkbox" name="date" value="Food" /><span className="label-span">Food</span></label>
+                                    <label className="filter-form-label"><input onChange={() => setPerformingArtsChecked(!performingArtsChecked)} checked={performingArtsChecked} className="filter-form-input" type="checkbox" name="date" value="Performing Arts" /><span className="label-span">Performing Arts</span></label>
                                 </form>
                             </div>
                             <div>
-                                <h4 className="form-heading">City</h4>
+                                <h4 className="filter-form-heading">City</h4>
                                 <form className="filter-form" onChange={e => setCityFilter(e.target.value)}>
-                                    <label className="form-label"><input defaultChecked={cityFilter === 'all'} className="form-input" type="radio" name="date" value="all" /><span className="label-span">All Cities</span></label>
-                                    <label className="form-label"><input defaultChecked={city === 'New York'} className="form-input" type="radio" name="date" value="New York" /><span className="label-span">New York</span></label>
-                                    <label className="form-label"><input defaultChecked={city === 'Miami'} className="form-input" type="radio" name="date" value="Miami" /><span className="label-span">Miami</span></label>
-                                    <label className="form-label"><input defaultChecked={city === 'Philadelphia'} className="form-input" type="radio" name="date" value="Philadelphia" /><span className="label-span">Philadelphia</span></label>
-                                    <label className="form-label"><input defaultChecked={city === 'Seattle'} className="form-input" type="radio" name="date" value="Seattle" /><span className="label-span">Seattle</span></label>
-                                    <label className="form-label"><input defaultChecked={city === 'Los Angeles'} className="form-input" type="radio" name="date" value="Los Angeles" /><span className="label-span">Los Angeles</span></label>
+                                    <label className="filter-form-label"><input defaultChecked={cityFilter === 'all'} className="filter-form-input" type="radio" name="date" value="all" /><span className="label-span">All Cities</span></label>
+                                    <label className="filter-form-label"><input defaultChecked={city === 'New York'} className="filter-form-input" type="radio" name="date" value="New York" /><span className="label-span">New York</span></label>
+                                    <label className="filter-form-label"><input defaultChecked={city === 'Miami'} className="filter-form-input" type="radio" name="date" value="Miami" /><span className="label-span">Miami</span></label>
+                                    <label className="filter-form-label"><input defaultChecked={city === 'Philadelphia'} className="filter-form-input" type="radio" name="date" value="Philadelphia" /><span className="label-span">Philadelphia</span></label>
+                                    <label className="filter-form-label"><input defaultChecked={city === 'Seattle'} className="filter-form-input" type="radio" name="date" value="Seattle" /><span className="label-span">Seattle</span></label>
+                                    <label className="filter-form-label"><input defaultChecked={city === 'Los Angeles'} className="filter-form-input" type="radio" name="date" value="Los Angeles" /><span className="label-span">Los Angeles</span></label>
                                 </form>
                             </div>
                             <div>
-                                <h4 className="form-heading">Price</h4>
+                                <h4 className="filter-form-heading">Price</h4>
                                 <form className="filter-form" onChange={(e) => setPriceFilter(e.target.value)}>
-                                    <label className="form-label"><input defaultChecked className="form-input" type="radio" name="price" value="all" /><span className="label-span">All</span></label>
-                                    <label className="form-label"><input className="form-input" type="radio" name="price" value="paid" /><span className="label-span">Paid</span></label>
-                                    <label className="form-label"><input className="form-input" type="radio" name="price" value="free" /><span className="label-span">Free</span></label>
+                                    <label className="filter-form-label"><input defaultChecked className="filter-form-input" type="radio" name="price" value="all" /><span className="label-span">All</span></label>
+                                    <label className="filter-form-label"><input className="filter-form-input" type="radio" name="price" value="paid" /><span className="label-span">Paid</span></label>
+                                    <label className="filter-form-label"><input className="filter-form-input" type="radio" name="price" value="free" /><span className="label-span">Free</span></label>
                                 </form>
                             </div>
                         </div>

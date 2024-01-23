@@ -70,15 +70,18 @@
 
 .dropdown-container {
     height: 100%;
-    display: block;
+    /* display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; */
 }
 
 .profile-button {
     justify-content: center;
     display: flex;
     text-decoration: none;
-    margin-top: 15%;
     cursor: pointer;
+    margin-top: 20px;
 }
 
 .profile-button-text {
@@ -91,15 +94,15 @@
 .profile-dropdown {
     padding-inline-start: 0;
     position: relative;
-    top: 15%;
+    top: 20px;
     background-color: #ffffff;
     font-size: 16px;
     list-style: none;
-    width:  160px;
+    width:  100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    /* box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); */
 }
 
 .dropdown-item {

@@ -16,6 +16,21 @@
     font-size: 60px;
 }
 
+.no-likes-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 200px;
+}
+
+.no-likes-content > img {
+    width: 200px;
+}
+
+.no-likes-content > h1 {
+    color: #9d9d9d;
+}
+
 .likes-event-component {
     border-radius: 16px;
     margin-bottom: 20px;

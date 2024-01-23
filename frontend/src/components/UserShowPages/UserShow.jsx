@@ -20,7 +20,7 @@ const UserShow = () => {
 
     const user = useSelector(state => state.profile.user) 
 
-    // const [showPast, setShowPast] = useState(false)
+    const [showPast, setShowPast] = useState(false)
     const [showUpcoming, setShowUpcoming] = useState(true)
     
 
@@ -35,12 +35,12 @@ const UserShow = () => {
     const currentDate = new Date()
 
     const isUpcoming = (event) => {
-        const eventDateTime = new Date(`${event.date} ${event.start_time}`);
+        const eventDateTime = new Date(`${event.date}`);
         return eventDateTime > currentDate;
     };
 
     const isPast = (event) => {
-        const eventDateTime = new Date(`${event.date} ${event.startTime}`);
+        const eventDateTime = new Date(`${event.date}`);
         return eventDateTime < currentDate;
     };
 
@@ -55,13 +55,13 @@ const UserShow = () => {
             <>
                 <section className="user-show-banner-main">
                     <div className="banner-image">
-                        <img src="https://assets-global.website-files.com/65a5cd622168466f53db2c04/65a5d09b804eeac962c5b687_https___cdn.evbuc.com_images_501367279_1440127062743_1_original.jpeg" alt="" />
+                        <img src={user.imageUrl} alt="" />
                     </div>
                     <div className="info-modal">
                         <div className="info-modal-content-parent">
                             <div className="info-modal-content">
                                 <div className="info-modal-logo">
-                                    <img src="https://assets-global.website-files.com/65a5cd622168466f53db2c04/65a5d09b804eeac962c5b687_https___cdn.evbuc.com_images_501367279_1440127062743_1_original.jpeg" alt="" />
+                                    <img src={user.imageUrl} alt="" />
                                 </div>
                                 <h1 className="info-modal-header">{user.fullName.toUpperCase()}</h1>
                                 <div className="info-modal-contact-button">
@@ -87,11 +87,13 @@ const UserShow = () => {
                     <div className="user-events-content">
                         <div className="user-events-header">
                             <h1>Events</h1>
-                            <Link className="user-events-button" onClick={() => {
-                                setShowUpcoming(!showUpcoming)
+                            <Link className={`user-events-button ${showUpcoming ? 'fill-blue' : '' }`} onClick={() => {
+                                setShowUpcoming(true)
+                                setShowPast(false)
                             }}>Upcoming</Link>
-                            <Link className="user-events-button" onClick={() => {
-                                setShowUpcoming(!showUpcoming)
+                            <Link className={`user-events-button ${!showUpcoming ? 'fill-blue' : '' }`} onClick={() => {
+                                setShowUpcoming(false)
+                                setShowPast(true)
                             }}>Past</Link>
                         </div>
                         <div className="user-events">
@@ -100,6 +102,14 @@ const UserShow = () => {
                             }) : pastEvents.map(event => {
                                 return <UserShowEventItem key={event.id} event={event} />
                             })}
+                            {showUpcoming && !futureEvents.length > 0 ? <div className="user-show-no-events">
+                                <img src="https://assets-global.website-files.com/65972da33a848ad8e00a649c/65a6a575f06c0b43840dd30e_ticket%20(1).png" alt="" />
+                                <h1>{`${user.fullName} has no upcoming events`}</h1>
+                                </div> : ""}
+                            {showPast && !pastEvents.length > 0 ? <div className="user-show-no-events">
+                                <img src="https://assets-global.website-files.com/65972da33a848ad8e00a649c/65a6a575f06c0b43840dd30e_ticket%20(1).png" alt="" />
+                                <h1>{`${user.fullName} has no past events`}</h1>
+                                </div> : ""}
                         </div>
                     </div>
                 </section>

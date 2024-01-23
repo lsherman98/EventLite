@@ -2,10 +2,11 @@ class Api::RegistrationsController < ApplicationController
   def create
     @registration = Registration.new(registration_params)
     @user = User.find_by(params[:user_id])
+    @event = Event.find_by(id: @registration.event_id)
     if @user
       @registration.save!
     end
-    render '/api/users/show'
+    render '/api/events/show'
   end
 
   def destroy

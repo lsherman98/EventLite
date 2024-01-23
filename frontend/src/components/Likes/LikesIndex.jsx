@@ -11,6 +11,7 @@ const LikesIndex = () => {
 
     useEffect(()=>{
         if (!sessionUser) navigate("/login");
+        window.scrollTo(0, 0)
     }, [sessionUser, navigate]);
 
     // let likedEvents = []
@@ -35,9 +36,12 @@ const LikesIndex = () => {
         <section>
             <div className="likes-content">
                 <h1>Likes</h1>
-                {user && likedEvents.map(event => {
+                {user && likedEvents.length > 0 ? likedEvents.map(event => {
                     return <LikesIndexItem key={event.id} event={event} />
-                })}
+                }) : <div className="no-likes-content">
+                        <img src="https://assets-global.website-files.com/65972da33a848ad8e00a649c/65a6a575f06c0b43840dd30e_ticket%20(1).png" alt="" />
+                        <h1>You havent liked anything!</h1>
+                    </div>}
             </div>
 
         </section>

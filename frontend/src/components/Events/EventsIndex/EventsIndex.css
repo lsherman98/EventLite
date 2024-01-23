@@ -71,7 +71,7 @@
     margin-top: 0;
 }
 
-.form-heading {
+.filter-form-heading {
     margin-top: 10px;
     font-size: 18px;
     line-height: 24px;
@@ -84,16 +84,17 @@
     flex-direction: column;
 }
 
-.form-label {
+.filter-form-label {
     margin-left: 10px;
 }
 
-.form-input {
+.filter-form-input {
     height: 25px;
     margin-right: 5px;
+
 }
 
-.label-span {
+.filter-label-span {
     cursor: pointer;
 }
 

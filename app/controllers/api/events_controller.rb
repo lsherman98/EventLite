@@ -34,7 +34,7 @@ class Api::EventsController < ApplicationController
 
     if @event && @event.user_id == current_user.id
       @event.destroy!
-      head :no_content
+      render :show
     end
   end
 
@@ -50,7 +50,7 @@ class Api::EventsController < ApplicationController
 
   private
   def event_params
-    params.require(:event).permit(:title, :description, :venue, :category, :price, :city, :date, :address, :start_time, :age_limit, :user_id)
+    params.require(:event).permit(:title, :description, :venue, :category, :price, :city, :date, :address, :start_time, :age_limit, :user_id, :photo)
   end
 
 end

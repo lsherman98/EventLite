@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { csrfFetch } from "./csrf"
+import { addEvent, removeEvent } from "./session"
 
 
 export const getEvents = () => async dispatch => {
@@ -16,23 +17,22 @@ export const getEvent = (eventId) => async dispatch => {
     const response = await csrfFetch(`/api/events/${eventId}`)
     let data = await response.json()
     if (response.ok) {
-        dispatch(addEvent(data))
+        dispatch(showEvent(data))
     } 
+    return response
 }
 
 export const createEvent = (event) => async dispatch => {
     const response = await csrfFetch("/api/events", {
         method: "POST",
-        body: JSON.stringify(event),
-        headers: {
-            "content-type": "application/json"
-        }
+        body: event
     })
     let data = await response.json()
     if (response.ok) {
-        dispatch(addEvent(data))
+        dispatch(addEvent(data.event))
+        return data.event
     } else {
-        return data
+        return data.event
     }
 }
 
@@ -56,8 +56,9 @@ export const deleteEvent = (eventId) => async dispatch => {
     const response = await csrfFetch(`/api/events/${eventId}`, {
         method: "DELETE"
     })
+    const data = await response.json()
     if (response.ok) {
-        dispatch(removeEvent())
+        dispatch(removeEvent(data.event))
     }
 }
 
@@ -66,18 +67,14 @@ const eventReducer = createSlice({
     name: 'events',
     initialState: {},
     reducers: {
-        addEvent: (state, action) => {
-            return {...state, ...action.payload}
-        },
         addEvents: (state, action) => {
            return {...action.payload}
         },
-        removeEvent: () => {
-            return {}
+        showEvent: (state, action) => {
+            return {...state, ...action.payload}
         }
-
      }
 })
 
-export const { addEvent, addEvents, removeEvent } = eventReducer.actions
+export const { addEvents, showEvent } = eventReducer.actions
 export default eventReducer.reducer

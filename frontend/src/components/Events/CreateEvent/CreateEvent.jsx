@@ -19,6 +19,7 @@ const CreateEvent = () => {
     const [time, setTime] = useState()
     const [category, setCategory] = useState()
     const [adultsOnly, setAdultsOnly] = useState(false)
+    const [photoFile, setPhotoFile] = useState(null)
 
     const [errors, setErrors] = useState([])
 
@@ -38,30 +39,47 @@ const CreateEvent = () => {
 
     const todaysDate = getCurrentDate();
 
+    const handleFile = ({currentTarget}) => {
+        const file = currentTarget.files[0]
+        setPhotoFile(file)
+    }
 
-    const handleSubmit = (e) => {
+
+    const handleSubmit = async (e) => {
         e.preventDefault()
 
-        const event = {
-            user_id: sessionUser.id,
-            title: title,
-            description: description,
-            venue: venue,
-            city: city,
-            address: address,
-            price: price,
-            date: date,
-            start_time: time,
-            category: category,
-            age_limit: adultsOnly
+        const newEvent = new FormData()
+
+        newEvent.append('event[user_id]', sessionUser.id);
+        newEvent.append('event[title]', title);
+        newEvent.append('event[description]', description);
+        newEvent.append('event[venue]', venue);
+        newEvent.append('event[city]', city);
+        newEvent.append('event[address]', address);
+        newEvent.append('event[price]', price);
+        newEvent.append('event[date]', date);
+        newEvent.append('event[start_time]', time);
+        newEvent.append('event[category]', category);
+        newEvent.append('event[age_limit]', adultsOnly);
+
+        if (photoFile) {
+            newEvent.append('event[photo]', photoFile);
         }
 
-       return dispatch(createEvent(event))
+
+       dispatch(createEvent(newEvent))
             .then(async (res) => {
                 let data = res
                 if (data?.errors) setErrors(data.errors)
                 else if (data) setErrors([data])
-                else setErrors([res.statusText])
+                // else setErrors([res.statusText])
+                return data
+            })
+            .then((data) => {
+                if (data) {
+                    setPhotoFile(null)
+                    navigate(`/events/${data.id}`)
+                }
             })
     }
 
@@ -101,17 +119,16 @@ const CreateEvent = () => {
                             <option className="create-select-option" value="Performing Arts">Performing Arts</option>
                             <option className="create-select-option" value="Food">Food</option>
                         </select>
-                        <h1>image upload</h1>
+                        <label > Upload an event photo: <br />
+                            <input type="file" onChange={handleFile}/>
+                        </label>
                         <input className="event-create-submit-button" type="button" value="Create Your Event" onClick={handleSubmit}/>
                     </div>
                         <div className="submit-errors create-errors">
-                            {errors.map(error => <p key={error}>{error}</p>)}
+                            {errors.map((error, i) => <p key={i}>{error}</p>)}
                         </div>
                 </form>
             </div>
-
-
-
         </section>
     )
 }

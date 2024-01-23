@@ -5,8 +5,15 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+require "open-uri"
 
-ApplicationRecord.transaction do
+json_data = JSON.parse(File.read("./master_events.json"))
+seed_events = json_data['events']
+seed_users = json_data['users']
+
+
+
+# ApplicationRecord.transaction do
   def generate_time_within_range
     start_time = Time.parse('5:00 PM')
     end_time = Time.parse('11:00 PM')
@@ -22,7 +29,9 @@ ApplicationRecord.transaction do
   # Unnecessary if using `rails db:seed:replant`
   # Registration.destroy_all
   # Bookmark.destroy_all
+  puts "Destoying Events..."
   Event.destroy_all
+  puts "Destoying Users..."
   User.destroy_all
 
   puts "Resetting primary keys..."
@@ -41,63 +50,80 @@ ApplicationRecord.transaction do
     first_name: "demo",
     last_name: "user",
     bio: "I am the first user!"
-  )
+  ).photo.attach(io: URI.open("https://eventlite-seeds.s3.amazonaws.com/user-images/user-seed.jpeg"), filename: "user-seed.jpeg")
+
 
   # More users
-  50.times do
-    User.create!({
-      username: Faker::Internet.unique.username(specifier: 3),
-      email: Faker::Internet.unique.email,
-      password: 'password',
-      first_name: Faker::Name.first_name,
-      last_name: Faker::Name.last_name,
-      bio: Faker::Lorem.paragraph(sentence_count: 4)
-    })
+  seed_users.each do |seed_user|
+    imgId = seed_user['userId']
+    path = "https://eventlite-seeds.s3.amazonaws.com/user-images/#{imgId}.jpg"
+    # puts path
+    begin
+      User.create!({
+        username: Faker::Internet.unique.username(specifier: 3),
+        email: Faker::Internet.unique.email,
+        password: 'password',
+        first_name: Faker::Name.first_name,
+        last_name: Faker::Name.last_name,
+        bio: seed_user['bio']
+      })
+      .photo.attach(io: URI.open(path), filename: "#{imgId}.jpg")
+    rescue OpenURI::HTTPError => e
+
+      puts "Failed to fetch image for user #{imgId}: #{e.message}"
+      next
+    end
   end
+
+
 
   categories = ['Hobbies', 'Night Life', 'Music', 'Food', 'Performing Arts']
   cities = ['Miami', 'New York', 'Seattle', 'Los Angeles', 'Philadelphia']
   bool = [true, false]
-  user_ids = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-  event_ids = (1..100).to_a
+  user_ids = (1..200).to_a
+  event_ids = (1..500).to_a
 
   puts "Creating events..."
 
-  500.times do
+ seed_events.each do |seed_event|
+  imgId = seed_event['eventId']
+  path = "https://eventlite-seeds.s3.amazonaws.com/event-images/#{imgId}.jpg"
+
+  begin
     Event.create!({
       user_id: user_ids.sample,
-      title: Faker::Show.play,
-      description: Faker::Lorem.paragraph(sentence_count: 4),
+      title: seed_event['eventTitle'],
+      description: seed_event['eventDescription'],
       category: categories.sample,
-      price: Faker::Commerce.price(range: 0..50),
+      price: Faker::Commerce.price(range: 0..35),
       city: cities.sample,
-      date: Faker::Date.between(from: 1.months.ago, to: 6.months.from_now),
+      date: Faker::Date.between(from: 3.months.ago, to: 6.months.from_now),
       address: Faker::Address.street_address,
       start_time: generate_time_within_range,
       age_limit: bool.sample,
-      venue: Faker::Restaurant.name
-    })
+      venue: seed_event['venue']
+    }).photo.attach(io: URI.open(path), filename: "#{imgId}.jpg")
+  rescue OpenURI::HTTPError => e
+      puts "Failed to fetch image for event #{imgId}: #{e.message}"
+      next
+  end
   end
 
+
   puts "Creating likes..."
-  50.times do |i|
+  User.all.each do |user|
     10.times do |j|
-      Bookmark.create!(user_id: i + 1, event_id: event_ids[j+1])
+      Bookmark.create!(user_id: user.id, event_id: j+1)
     end
   end
 
   puts "Registering users..."
-  50.times do |i|
+  Event.all.each do |event|
     20.times do |j|
-      Registration.create!(event_id: j + 1, user_id: i + 1, quantity: 1)
+      Registration.create!(event_id: event.id, user_id: j+10, quantity: [1, 2, 3, 4].sample)
     end
   end
 
-
-
   puts "Done!"
 
-
-
-
-end
+# end

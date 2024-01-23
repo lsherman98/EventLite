@@ -3,7 +3,7 @@ has_secure_password
 
 validates :username,
   uniqueness: true,
-  length: { in: 3..40, message:  "Username must be between 3 & 40 characters in length"},
+  length: { in: 3..140, message:  "Username must be between 3 & 40 characters in length"},
   format: { without: URI::MailTo::EMAIL_REGEXP, message:  "Can't be an email" }
 validates :email,
   uniqueness: true,

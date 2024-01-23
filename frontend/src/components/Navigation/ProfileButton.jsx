@@ -1,17 +1,20 @@
 import { useDispatch } from "react-redux";
 import { useState, useRef } from "react";
 import {logout} from "../../store/session"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 const ProfileButton = ({ user }) => {
     const dispatch = useDispatch()
     const [showMenu, setShowMenu] = useState(false)
     const dropdownRef = useRef(null);
+    const navigate = useNavigate()
 
     const handleLogout = (e) => {
         e.preventDefault();
         dispatch(logout());
+        navigate('/')
+
     };
 
     return (
@@ -25,6 +28,9 @@ const ProfileButton = ({ user }) => {
         <ul className="profile-dropdown" ref={dropdownRef}>
           <li className="dropdown-item">
             <Link to={`/profile`}>Go to Profile</Link>
+          </li>
+          <li className="dropdown-item">
+            <Link to={`/myevents`}>My Events</Link>
           </li>
           <li className="dropdown-item">
             <p onClick={handleLogout}>Log Out</p>

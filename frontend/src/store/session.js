@@ -15,21 +15,28 @@ export const login = (user) => async dispatch => {
     } else {
         return data.errors
     }
-    
 };
 
-export const signup = ({username, email, firstName, lastName, password}) => async (dispatch) => {
+
+export const updateUser = (user) => async dispatch => {
+    const response = await csrfFetch(`/api/users/${user.get('id')}`, {
+        method: "PUT",
+        body: user
+    });
+    let data = await response.json();
+    if (response.ok) {
+        dispatch(loginUser(data.user));
+        sessionStorage.setItem('currentUser', JSON.stringify(data.user));
+        return data
+    } else {
+        return data.errors
+    }
+};
+
+export const signup = (newUser) => async (dispatch) => {
     const response = await csrfFetch("/api/users", {
         method: "POST",
-        body: JSON.stringify({
-            user: {
-                username,
-                email,
-                first_name: firstName,
-                last_name: lastName,
-                password
-            }
-        })
+        body: newUser
     });
     const data = await response.json();
     if (response.ok) {
@@ -53,6 +60,7 @@ export const logout = () => async (dispatch) => {
 };
 
 export const register = ({user_id, event_id, quantity}) => async dispatch => {
+    console.log(user_id, event_id, quantity)
     const response = await csrfFetch('/api/registrations', {
         method: "POST",
         body: JSON.stringify({
@@ -67,9 +75,9 @@ export const register = ({user_id, event_id, quantity}) => async dispatch => {
         }
     })
     const data = await response.json();
+    console.log(data)
     if (response.ok) {
-        dispatch(loginUser(data.user));
-        sessionStorage.setItem('currentUser', JSON.stringify(data.user));
+        dispatch(addRegistration(data.event));
     }
 }
 
@@ -96,11 +104,21 @@ const sessionReducer = createSlice({
         logoutUser: (state, action) => {
             state.user = null;
         },
+        addRegistration: (state, action) => {
+            console.log(action.payload)
+            state.user.tickets.push(action.payload)
+        },
+        addEvent: (state, action) => {
+            state.user.events.push(action.payload)
+        },
+        removeEvent: (state, action) => {
+            state.user.events = state.session.user.events.filter(event => event !== action.payload)
+        }
     },
 });
 
 // Export actions directly from the slice
-export const { loginUser, logoutUser } = sessionReducer.actions;
+export const { loginUser, logoutUser, addRegistration, addEvent, removeEvent} = sessionReducer.actions;
 
 // Export the reducer
 export default sessionReducer.reducer;

@@ -24,7 +24,6 @@
     vertical-align: middle;
     display: inline-block;
     filter: blur(15px);
-    vertical-align: middle;
 
 }
 
@@ -134,18 +133,24 @@
 .user-events-header > h1 {
     color: #001471;
     margin: 0;
-    font-size: 38;
-    line-height: 44px;
+    font-size: 50px;
+    line-height: 38px;
+    margin-bottom: 20px;
 }
 
 .user-events-button {
-    color: #f19328;
+    color: #000000;
     border: 3px solid #d3d3d3;
     border-radius: 12px;
     margin: 15px 26px 15px 0px;
     padding: 5px 15px;
     text-decoration: none;
     font-size: 17px;
+}
+
+.fill-blue {
+    background-color: #4668ff;
+    color: white;
 }
 
 .user-events {
@@ -262,4 +267,21 @@
     padding: 4px;
     border-radius: 5px;
     font-size: 10px;
+}
+
+.user-show-no-events {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.user-show-no-events > img {
+    width: 200px;
+}
+
+.user-show-no-events > h1 {
+    text-align: center;
+    color: #646464;
 }

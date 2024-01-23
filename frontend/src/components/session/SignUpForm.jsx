@@ -17,11 +17,16 @@ const SignUpForm = () => {
     const [errors, setErrors] = useState([])
     const dispatch = useDispatch()
     const sessionUser = useSelector(state => state.session.user)
-
+    const [photoFile, setPhotoFile] = useState(null)
 
     useEffect(()=>{
         if (sessionUser) navigate("/");
     }, [sessionUser, navigate]);
+
+    const handleFile = ({currentTarget}) => {
+        const file = currentTarget.files[0]
+        setPhotoFile(file)
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -32,12 +37,30 @@ const SignUpForm = () => {
             return
         }
 
-        return dispatch(sessionActions.signup({username, email, firstName, lastName, password}))
+        const newUser = new FormData()
+        newUser.append('user[username]', username);
+        newUser.append('user[email]', email);
+        newUser.append('user[firstName]', firstName);
+        newUser.append('user[lastName]', lastName);
+        newUser.append('user[password]', password);
+
+        if (photoFile) {
+            newUser.append('user[photo]', photoFile);
+        }
+
+        return dispatch(sessionActions.signup(newUser))
             .then(async (res) => {
                 let data = res
                 if (data?.errors) setErrors(data.errors)
                 else if (data) setErrors([data])
                 else setErrors([res.statusText])
+                return data
+            })
+            .then((data) => {
+                if (data) {
+                    setPhotoFile(null)
+                    navigate(`/users/${data.user.id}`)
+                }
             })
 
     }
@@ -121,6 +144,10 @@ const SignUpForm = () => {
                                 onChange={(e) => setConfirmPassword(e.target.value)}
                                 required
                             />
+
+                            <label > Upload an profile photo: <br />
+                                <input type="file" onChange={handleFile}/>
+                            </label>
 
                             <div className="login-buttons">
                                 <input 

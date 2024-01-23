@@ -18,6 +18,22 @@ const EventAdminShow = ({event}) => {
         navigate('/profile')
     }
 
+    function convertToRegularTime(time24) {
+        const [hour, minute] = time24.split(':');
+        const parsedHour = parseInt(hour, 10);
+        let period = 'AM';
+        let regularHour = parsedHour;
+        if (parsedHour >= 12) {
+            period = 'PM';
+            if (parsedHour > 12) {
+            regularHour = parsedHour - 12;
+            }
+        }
+        return `${regularHour}:${minute} ${period}`;
+    }
+
+    const regularTime = convertToRegularTime(event.startTime);
+
 
     const formattedDate = new Date(event.date).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
 
@@ -25,9 +41,9 @@ const EventAdminShow = ({event}) => {
         <>
         <section className={`event-show-main-section ${showEdit ? 'blur' : ''}`}>
              <div className="event-show-left">
-                <img src="https://assets-global.website-files.com/65a5cd622168466f53db2c04/65a5fef5e8b13697aa53ee78_https___cdn.evbuc.com_images_646054859_1440127062743_1_original.jpeg" alt="" />
+                <img src={event.imageUrl} alt="" />
                 <h1>{event.title.toUpperCase()}</h1>
-                <h2>{`${formattedDate}, ${event.startTime}`}     |     <span className="event-show-category">{event.category}</span></h2>
+                <h2>{`${formattedDate}, ${regularTime}`}     |     <span className="event-show-category">{event.category}</span></h2>
                 <h3>Organized by <Link to={`/users/${event.userId}`}>{event.organizer}</Link><span className="adults-only"><span className="divider">     |     </span>{event.ageLimit ? "This event is 21+" : ""}</span></h3>
                 <div className="event-admin-show-total-likes"><span>{event.totalLikes}</span>Likes</div>
                 <div className="admin-buttons">
