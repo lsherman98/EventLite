@@ -35,7 +35,7 @@ const EventGenericShow = () => {
                     navigate('/events')
                 }
             })
-    }, [eventId, dispatch])
+    }, [])
     
  
     

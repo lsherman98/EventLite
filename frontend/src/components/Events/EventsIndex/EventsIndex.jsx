@@ -48,18 +48,20 @@ const EventsIndex = () => {
     }
     const events = useSelector(state => state.events)
 
+    const cachedEvents = localStorage.getItem('cachedEvents') 
+
+    
+
     useEffect(() => {
         window.scrollTo(0, 0)
 
 
-        const cachedEvents = localStorage.getItem('cachedEvents') 
 
         if (cachedEvents) {
             const cachedEventsArray = JSON.parse(cachedEvents);
             console.log(cachedEventsArray[0]['imageUrl'])
             fetch(cachedEventsArray[0]['imageUrl'])
                 .then(res => {
-                    console.log(res)
                     if (!res.ok) {
                         localStorage.clear()
                         dispatch(getEvents())
@@ -68,14 +70,14 @@ const EventsIndex = () => {
                     }  
                 })
         } else {
-            dispatch(getEvents())
-        }
+        dispatch(getEvents())
+    }
 
         if (city) {
             setCityFilter(city)
         }
         setSearchParams({})
-    }, [dispatch, city, setSearchParams])
+    }, [])
     
 
 
