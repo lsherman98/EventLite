@@ -59,7 +59,6 @@ const EventsIndex = () => {
 
         if (cachedEvents) {
             const cachedEventsArray = JSON.parse(cachedEvents);
-            console.log(cachedEventsArray[0]['imageUrl'])
             fetch(cachedEventsArray[0]['imageUrl'])
                 .then(res => {
                     if (!res.ok) {
@@ -77,7 +76,7 @@ const EventsIndex = () => {
             setCityFilter(city)
         }
         setSearchParams({})
-    }, [])
+    }, [cachedEvents, city, dispatch, setSearchParams])
     
 
 
