@@ -33,7 +33,7 @@ const EventIndexListItem = ({ event }) => {
 
     const handleLike = (e) => {
         e.preventDefault()
-         if (!sessionUser) navigate("/")
+         if (!sessionUser) navigate("/login")
 
           const likeTarget = {
                 event_id: event.id,

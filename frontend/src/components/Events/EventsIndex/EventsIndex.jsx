@@ -50,7 +50,8 @@ const EventsIndex = () => {
     }
     const events = useSelector(state => state.events)
 
-    const cachedEvents = localStorage.getItem('cachedEvents') 
+    // const cachedEvents = localStorage.getItem('cachedEvents') 
+    const cachedEvents = null
 
     
 
@@ -154,6 +155,10 @@ const EventsIndex = () => {
                 }
             })
         }
+
+
+        let header = cityFilter
+        
     
 
 
@@ -161,7 +166,7 @@ const EventsIndex = () => {
         <div className="events-index-main">
             <div className="events-index-left">
                 <div className="events-index-headers">
-                    <h1>Events in New York</h1>
+                    <h1>{header === 'all' ? 'All Events' : `Events in ${header}`}</h1>
                     <h4>Search for something you love or check out popular events in your area.</h4>
                 </div>
                 <div className="events-index-left-content">

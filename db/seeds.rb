@@ -85,7 +85,7 @@ seed_users = json_data['users']
   categories = ['Hobbies', 'Night Life', 'Music', 'Food', 'Performing Arts']
   cities = ['Miami', 'New York', 'Seattle', 'Los Angeles', 'Philadelphia']
   bool = [true, false]
-  user_ids = (1..67).to_a
+  user_ids = (1..9).to_a
   event_ids = (1..229).to_a
 
   puts "Creating events..."
@@ -127,8 +127,8 @@ seed_users = json_data['users']
 
   puts "Registering users..."
   Event.all.each do |event|
-    20.times do |j|
-      Registration.create!(event_id: event.id, user_id: j+10, quantity: [1, 2, 3, 4].sample)
+    10.times do |j|
+      Registration.create!(event_id: event.id, user_id: j+1, quantity: [1, 2, 3, 4].sample)
     end
   end
 

@@ -67,7 +67,8 @@ const eventReducer = createSlice({
     initialState: {},
     reducers: {
         addEvents: (state, action) => {
-           return {...action.payload}
+           const newState = {...state, ...action.payload}
+           return newState
         },
         showEvent: (state, action) => {
             return {...state, ...action.payload}
