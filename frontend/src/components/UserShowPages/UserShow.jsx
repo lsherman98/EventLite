@@ -47,7 +47,6 @@ const UserShow = () => {
     const futureEvents = events.filter(isUpcoming) 
     const pastEvents = events.filter(isPast)
 
-    console.log(user.bio)
 
     if (loading) {
         return <h1></h1>
