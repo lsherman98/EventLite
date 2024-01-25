@@ -60,7 +60,6 @@ export const logout = () => async (dispatch) => {
 };
 
 export const register = ({user_id, event_id, quantity}) => async dispatch => {
-    console.log(user_id, event_id, quantity)
     const response = await csrfFetch('/api/registrations', {
         method: "POST",
         body: JSON.stringify({
@@ -77,7 +76,63 @@ export const register = ({user_id, event_id, quantity}) => async dispatch => {
     const data = await response.json();
     console.log(data)
     if (response.ok) {
-        dispatch(addRegistration(data.event));
+        // dispatch(addRegistration(data));
+        dispatch(loginUser(data.user))
+        sessionStorage.setItem('currentUser', JSON.stringify(data.user))
+    }
+}
+
+export const  registrationUpdate = (registration) => async dispatch => {
+    const response = await csrfFetch(`/api/registrations/${registration.id}`, {
+        method: "PUT",
+        body: JSON.stringify(registration),
+        headers: {
+            "content-type": "application/json"
+        }
+    })
+    const data = await response.json();
+    console.log(data)
+    if (response.ok) {
+        // dispatch(updateRegistration(data));
+        dispatch(loginUser(data.user))
+        sessionStorage.setItem('currentUser', JSON.stringify(data.user))
+    }
+}
+
+export const registrationRefund = (registrationId) => async dispatch => {
+    const response = await csrfFetch(`/api/registrations/${registrationId}`, {
+        method: "DELETE"
+    })
+    const data = await response.json();
+    console.log(data)
+    if (response.ok) {
+        // dispatch(removeTicket(data));
+        dispatch(loginUser(data.user))
+        sessionStorage.setItem('currentUser', JSON.stringify(data.user))
+    }
+}
+
+export const like = (like) => async dispatch => {
+    const response = await csrfFetch('/api/bookmarks', {
+        method: "POST",
+        body: JSON.stringify(like)
+    })
+    const data = await response.json()
+    if (response.ok) {
+        dispatch(addLike(data.event))
+        return data
+    }
+}
+
+export const unLike = (like) => async dispatch => {
+    const response = await csrfFetch('/api/bookmarks/undefined', {
+        method: "DELETE",
+        body: JSON.stringify(like)
+    })
+    const data = await response.json()
+    if (response.ok) {
+        dispatch(removeLike(data.event))
+        return response
     }
 }
 
@@ -105,20 +160,41 @@ const sessionReducer = createSlice({
             state.user = null;
         },
         addRegistration: (state, action) => {
-            console.log(action.payload)
-            state.user.tickets.push(action.payload)
+            // state.user.tickets.push(action.payload)
+            console.log(action.payload.user.tickets)
+            state.user.tickets = action.payload.user.tickets
         },
         addEvent: (state, action) => {
             state.user.events.push(action.payload)
         },
         removeEvent: (state, action) => {
             state.user.events = state.session.user.events.filter(event => event !== action.payload)
+        },
+        addLike: (state, action) => {
+            state.user.likes.push(action.payload)
+        },
+        removeLike: (state, action) => {
+            state.user.likes = state.user.likes.filter(like => like.id !== action.payload.id)
+        },
+        updateRegistration: (state, action) => {
+           state.user.tickets.forEach(ticket => {
+                if (ticket.registrationId === action.payload.id) {
+                    ticket.ticketAmount = action.payload.quantity
+                } 
+           })
+        },
+        removeTicket: (state, action) => {
+            state.user.tickets = state.user.tickets.filter(ticket => {
+                if (ticket.id !== action.payload.event_id) {
+                    return ticket
+                }
+            })
         }
     },
 });
 
 // Export actions directly from the slice
-export const { loginUser, logoutUser, addRegistration, addEvent, removeEvent} = sessionReducer.actions;
+export const { loginUser, logoutUser, addRegistration, addEvent, removeEvent, addLike, removeLike, updateRegistration, removeTicket } = sessionReducer.actions;
 
 // Export the reducer
 export default sessionReducer.reducer;

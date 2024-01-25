@@ -8,6 +8,7 @@ const EventEdit = ({event, setShowEdit}) => {
 
     const dispatch = useDispatch() 
     const [errors, setErrors] = useState([])
+    const [photoFile, setPhotoFile] = useState(null)
 
     const [title, setTitle] = useState(event.title)
     const [description, setDescription] = useState(event.description)
@@ -21,37 +22,48 @@ const EventEdit = ({event, setShowEdit}) => {
     const [adultsOnly, setAdultsOnly] = useState(event.ageLimit)
     const sessionUser = useSelector(state => state.session.user)
     
-    console.log(event.adultsOnly)
+    const handleFile = ({currentTarget}) => {
+        const file = currentTarget.files[0]
+        setPhotoFile(file)
+    }
 
     const handleUpdate = (e) => {
         e.preventDefault()
-        
 
-        const updatedEvent = {
-            id: event.id,
-            user_id: sessionUser.id,
-            title: title,
-            description: description,
-            venue: venue,
-            city: city,
-            address: address,
-            price: price,
-            date: date,
-            start_time: time,
-            category: category,
-            age_limit: adultsOnly
+
+        const updatedEvent = new FormData()
+
+        updatedEvent.append('id', event.id)
+        updatedEvent.append('event[user_id]', sessionUser.id);
+        updatedEvent.append('event[title]', title);
+        updatedEvent.append('event[description]', description);
+        updatedEvent.append('event[venue]', venue);
+        updatedEvent.append('event[city]', city);
+        updatedEvent.append('event[address]', address);
+        updatedEvent.append('event[price]', price);
+        updatedEvent.append('event[date]', date);
+        updatedEvent.append('event[start_time]', time);
+        updatedEvent.append('event[category]', category);
+        updatedEvent.append('event[age_limit]', adultsOnly);
+
+        if (photoFile) {
+            updatedEvent.append('event[photo]', photoFile);
         }
-        setShowEdit(false)
 
-         
-
-       return dispatch(updateEvent(updatedEvent))
+        
+        return dispatch(updateEvent(updatedEvent))
             .then(async (res) => {
                 let data = res
                 if (data?.errors) setErrors(data.errors)
-                else if (data) setErrors([data])
-                else setErrors([res.statusText])
+                return data
             })
+            .then((data) => {
+                if (data) {
+                    setPhotoFile(null)
+                    setShowEdit(false)
+                }
+            })
+
     }
 
     function getCurrentDate() {
@@ -94,7 +106,9 @@ const EventEdit = ({event, setShowEdit}) => {
                         <option className="create-select-option" value="Performing Arts">Performing Arts</option>
                         <option className="create-select-option" value="Food">Food</option>
                     </select>
-                    <h1>image upload</h1>
+                     <label > Update your event photo: <br />
+                        <input type="file" onChange={handleFile}/>
+                    </label>
                     <div className="event-edit-buttons">
                         <input className="event-edit-submit-button" type="button" value="Cancel"  onClick={() => setShowEdit(false)}/>
                         <input className="event-edit-submit-button" type="button" value="Update Event" onClick={handleUpdate} />

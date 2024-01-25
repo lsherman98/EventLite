@@ -41,6 +41,11 @@
     color: rgb(59, 59, 59);
 }
 
+.edit-profile-form > button:hover {
+    cursor: pointer;
+    background-color: #706d7f;
+}
+
 .profile-photo {
     background-color: #fff;
     border-radius: 70px;

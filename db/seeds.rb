@@ -32,6 +32,8 @@ seed_users = json_data['users']
   Event.destroy_all
   puts "Destoying Users..."
   User.destroy_all
+  Registration.destroy_all
+  Bookmark.destroy_all
 
   puts "Resetting primary keys..."
   # For easy testing, so that after seeding, the first `User` has `id` of 1
@@ -41,6 +43,8 @@ seed_users = json_data['users']
   ApplicationRecord.connection.reset_pk_sequence!('registrations')
 
   puts "Creating users..."
+
+
   # Create one user with an easy to remember username, email, and password:
   User.create!(
     username: 'demouser',
@@ -51,7 +55,7 @@ seed_users = json_data['users']
     bio: "I am the first user!"
   ).photo.attach(io: URI.open("https://eventlite-seeds.s3.amazonaws.com/user-images/user-seed.jpeg"), filename: "user-seed.jpeg")
 
-
+  total_users = 1
   # More users
   seed_users.each do |seed_user|
     imgId = seed_user['userId']
@@ -67,6 +71,8 @@ seed_users = json_data['users']
         bio: seed_user['bio']
       })
       .photo.attach(io: URI.open(path), filename: "#{imgId}.jpg")
+      total_users += 1
+      puts "User created"
     rescue OpenURI::HTTPError => e
 
       puts "Failed to fetch image for user #{imgId}: #{e.message}"
@@ -83,7 +89,7 @@ seed_users = json_data['users']
   event_ids = (1..500).to_a
 
   puts "Creating events..."
-
+  total_events = 0
  seed_events.each do |seed_event|
   imgId = seed_event['eventId']
   path = "https://eventlite-seeds.s3.amazonaws.com/event-images/#{imgId}.jpg"
@@ -102,6 +108,9 @@ seed_users = json_data['users']
       age_limit: bool.sample,
       venue: seed_event['venue']
     }).photo.attach(io: URI.open(path), filename: "#{imgId}.jpg")
+
+    total_events += 1
+    puts "Event created"
   rescue OpenURI::HTTPError => e
       puts "Failed to fetch image for event #{imgId}: #{e.message}"
       next
@@ -123,6 +132,10 @@ seed_users = json_data['users']
     end
   end
 
+
+
   puts "Done!"
+  puts "# of Users created: #{total_users}"
+  puts "# of Events created: #{total_events}"
 
 # end

@@ -20,5 +20,7 @@ json.user do
     json.imageUrl ticket.photo.attached? ? ticket.photo.url : nil
     json.startTime ticket.start_time
     json.organizer "#{ticket.organizer.first_name} #{ticket.organizer.last_name}"
+    json.ticketAmount Registration.find_by(event_id: ticket.id, user_id: @user.id).quantity
+    json.registrationId Registration.find_by(event_id: ticket.id, user_id: @user.id).id
   end
 end

@@ -69,9 +69,9 @@ const SignUpForm = () => {
          <div className="login-page">
             <div className="signup-left">
                 <div className="left-content">
-                    <div className="login-headers">
-                        <h3 className="login-logo">eventlite</h3>
-                        <h1 className="login-heading">Sign Up</h1>
+                    <div className="signup-headers">
+                        {/* <h3 className="login-logo">eventlite</h3> */}
+                        <h1 className="signup-heading">Sign Up</h1>
                     </div>
                     <div className="login-form-container">
                         <form onSubmit={handleSubmit} className="login-form">
@@ -146,7 +146,7 @@ const SignUpForm = () => {
                             />
 
                             <label > Upload an profile photo: <br />
-                                <input type="file" onChange={handleFile}/>
+                                <input type="file" onChange={handleFile} className="image-upload"/>
                             </label>
 
                             <div className="login-buttons">

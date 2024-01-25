@@ -24,6 +24,8 @@ const EventsIndex = () => {
     const [foodChecked, setFoodChecked] = useState(category === 'Food' || false)
     const [performingArtsChecked, setPerformingArtsChecked] = useState(category === 'Performing Arts' || false)
 
+    const [loading, setLoading] = useState(true)
+
     const handleCheckAll = () => {
         if (allCategoriesChecked) {
             setAllCategoriesChecked(false)
@@ -67,14 +69,21 @@ const EventsIndex = () => {
                         console.log('response not ok')
                         localStorage.clear()
                         dispatch(getEvents())
+                            .then(() => {
+                                setLoading(false)
+                            })
                     } else {
                         console.log('response ok')
                         dispatch(addEvents(cachedEventsArray))
+                        setLoading(false)
                     }  
                 })
         } else {
             console.log('cached events dont exist')
-        dispatch(getEvents())
+            dispatch(getEvents())
+                .then(() => {
+                    setLoading(false)
+            })
     }
 
         if (city) {
@@ -202,6 +211,12 @@ const EventsIndex = () => {
                     </div>
 
                     <div className="events-index-list">
+                        {loading && 
+                        <div className="index-loading-container">
+                            <div className="index-loading-animation"></div>
+                        </div>}
+
+
                         {filteredEvents.map((event) => {
                             return <EventIndexListItem key={event.id} event={event} />
                         })}

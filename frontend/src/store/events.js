@@ -37,16 +37,15 @@ export const createEvent = (event) => async dispatch => {
 }
 
 export const updateEvent = (event) => async dispatch => {
-    const response = await csrfFetch(`/api/events/${event.id}`, {
+    const response = await csrfFetch(`/api/events/${event.get('id')}`, {
         method: "PUT",
-        body: JSON.stringify(event),
-        headers: {
-            "content-type": "application/json"
-        }
+        body: event
     })
     let data = await response.json()
+    console.log(data)
     if (response.ok) {
-        dispatch(addEvent(data))
+        dispatch(showEvent(data))
+        return data
     } else {
         return data.errors
     }

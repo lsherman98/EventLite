@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom"
 import { Link } from "react-router-dom"
 import "./EventShowGeneric.css"
 import { getEvent } from "../../../store/events"
-import { register } from "../../../store/session"
+import { register, registrationRefund, registrationUpdate } from "../../../store/session"
 import EventAdminShow from "./EventAdminShow"
 
 
@@ -15,19 +15,42 @@ const EventGenericShow = () => {
     const navigate = useNavigate()
     const { eventId } = useParams()
     
-    const [showPurchase, setShowPurchase] = useState(false)
-    const [loginMessage, setLoginMessage] = useState(false)
-    const [success, setSuccess] = useState(false)
-    const sessionUser = useSelector(state => state.session.user)
     
-    const [firstName, setFirstName] = useState('')
-    const [lastName, setLastName] = useState('')
-    const [email, setEmail] = useState('')
+    const [showPurchase, setShowPurchase] = useState(false)
+    
+    const [loginMessage, setLoginMessage] = useState(false)
+    const [registered, setRegistered] = useState(false)
+    const [updated, setUpdated] = useState(false)
+
+
+    const sessionUser = useSelector(state => state.session.user)
+    const [registrationId, setRegistrationId] = useState(null)
+    
+    const [firstName, setFirstName] = useState(sessionUser.firstName)
+    const [lastName, setLastName] = useState(sessionUser.lastName)
+    const [email, setEmail] = useState(sessionUser.email)
     const [quantity, setQuantity] = useState(1)
+
+
     
     
     const event = useSelector(state => state.events.event) 
     
+
+    useEffect(() => {
+        if (event && sessionUser) {
+            sessionUser.tickets.forEach (ticket => {
+                if (ticket.id === event.id) {
+                    setRegistered(true)
+                    setRegistrationId(ticket.registrationId)
+                    setQuantity(ticket.ticketAmount)
+                    return
+                }
+            }) 
+        } 
+    }, [sessionUser, event])
+
+
     useEffect(() => {
         dispatch(getEvent(eventId))
             .then((res) => {
@@ -37,10 +60,12 @@ const EventGenericShow = () => {
             })
     }, [dispatch, eventId, navigate])
     
+
  
     
-    const handleCheckout = () => {
-        setSuccess(true)
+    const handleCheckout = (e) => {
+        e.preventDefault()
+
         setShowPurchase(false)
         
         const userId = sessionUser.id
@@ -52,7 +77,35 @@ const EventGenericShow = () => {
         }
         
         dispatch(register(registration))
+        setRegistered(true)
     }
+
+    const handleUpdate = (e) => {
+        e.preventDefault()
+
+        setShowPurchase(false)
+        
+        const userId = sessionUser.id
+        
+        const registration = {
+            user_id: userId,
+            event_id: eventId,
+            quantity: quantity,
+            id: registrationId
+        }
+        
+        dispatch(registrationUpdate(registration))
+        setUpdated(true)
+    }
+
+    const handleRefund = () => {
+        dispatch(registrationRefund(registrationId))
+        setRegistered(false)
+        setRegistrationId(null)
+        setQuantity(1)
+        setShowPurchase(false)
+    }
+    
     
     
 
@@ -98,7 +151,8 @@ const EventGenericShow = () => {
                         <p className="description-text">{event.description}</p>
                     </div>
                     <div className="event-show-right">
-                        {success && <h3 className="success-message">Visit your profile to see your tickets!</h3>}
+                        {registered && !updated && <h3 className="success-message">Visit your profile to see your tickets!</h3>}
+                        {updated && <h3 className="success-message">Your order has been updated.</h3>}
                         {!showPurchase && <div className="purchase-div">
                             <h1>${event.price}</h1>
                             <div className="purchase-button" onClick={() => {
@@ -106,26 +160,26 @@ const EventGenericShow = () => {
                                     setLoginMessage(true)
                                 } else {
                                     setShowPurchase(!showPurchase)
-                                    setSuccess(false)
                                 }
-                                }}>Tickets</div>
+                                }}>{registered ? "Update Order" : "Tickets"}</div>
+                           
                             {loginMessage && <p>Login to purchase tickets.</p>}
                             </div>
                         }
                         {showPurchase && (
-                            <form className="purchase-form" onSubmit={handleCheckout}>
+                            <form className="purchase-form" onSubmit={registered ? handleUpdate : handleCheckout}>
                                 <input required onInput={(e) => setFirstName(e.target.value)} className="purchase-form-input" type="text" placeholder="First Name" value={firstName}/>
                                 <input required onInput={(e) => setLastName(e.target.value)} className="purchase-form-input" type="text" placeholder="Last Name" value={lastName}/>
                                 <input required onInput={(e) => setEmail(e.target.value)} className="purchase-form-input" type="email" placeholder="Email" value={email}/>
                                 <input required onChange={(e) => setQuantity(e.target.value)} className="purchase-form-input" type="number" value={quantity}  min='1' />
                                 <p className="ticket-total">Total: ${event.price * quantity}</p>
                                 <div className="purchase-buttons">
-                                    <button type="submit" className="purchase-button" >Checkout</button>
+                                    <button type="submit" className="purchase-button" >{registered ? 'Update' : 'Checkout'}</button>
                                     <button className="purchase-button" onClick={() => {
                                         setShowPurchase(!showPurchase)
-                                        setSuccess(false)
                                     }}>Cancel</button>
                                 </div>
+                                {registered && <div onClick={handleRefund} className="refund-button" >{"Request a Refund"}</div>}
                             </form>
                         )}
                     </div>

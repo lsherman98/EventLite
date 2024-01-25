@@ -1,8 +1,59 @@
-import { Link } from "react-router-dom"
+import { useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { Link, useNavigate } from "react-router-dom"
+import { like, unLike } from "../../store/session"
 
 
 
 const LikesIndexItem = ({event}) => {
+
+    const sessionUser = useSelector(state => state.session.user)
+    const likes = sessionUser.likes
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const [liked, setLiked] = useState(false)
+
+    useEffect(() => {
+        likes.forEach(like => {
+            if (like.id === event.id) {
+                setLiked(true)
+                return
+            }
+        })
+    }, [likes, event.id])
+
+    const heartLiked = "https://assets-global.website-files.com/65a5cd622168466f53db2c04/65a5cd622168466f53db2c17_heart.png"
+    const heartUnliked = "https://assets-global.website-files.com/65a5cd622168466f53db2c04/65a69902acca43a0a41a7448_heart%20(1).png"
+
+    const handleLike = (e) => {
+        e.preventDefault()
+         if (!sessionUser) navigate("/")
+
+          const likeTarget = {
+                event_id: event.id,
+                user_id: sessionUser.id
+            }
+
+         if (!liked) {
+            dispatch(like(likeTarget))
+            .then(data => {
+                if (data) {
+                    setLiked(true)
+                }
+            })
+         } else {
+            dispatch(unLike(likeTarget))
+                .then(res => {
+                    if (res.ok) {
+                        setLiked(false)
+                    }
+                })
+         }
+    }
+
+
+
+
     function convertToRegularTime(time24) {
         const [hour, minute] = time24.split(':');
         const parsedHour = parseInt(hour, 10);
@@ -34,7 +85,7 @@ const LikesIndexItem = ({event}) => {
                 </div>
                 <div className="likes-event-component-graphics">
                     <img className="likes-event-component-img" src={event.imageUrl} alt="" />
-                    <img className="likes-event-component-button" src="https://assets-global.website-files.com/65a5cd622168466f53db2c04/65a5cd622168466f53db2c17_heart.png" alt="" />
+                    <img onClick={handleLike} className={`likes-event-component-button ${liked ? 'event-liked' : ''}`} src={liked ? heartLiked : heartUnliked} alt="" />
                 </div>
             </Link>
         </div>  

@@ -6,7 +6,7 @@
     border-color: #000;
     border-radius: 0;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-around;
     align-items: start;
     margin-left: 120px;
     margin-right: 120px;
@@ -166,6 +166,7 @@
     border-radius: 25px;
     position: sticky;
     top: 50px;
+    max-width: 300px;
 }
 
 .purchase-div > h1 {
@@ -193,6 +194,27 @@
     width: 45%;
 }
 
+.refund-button {
+    color: #fff;
+    line-height: inherit;
+    cursor: pointer;
+    background-color: rgb(31, 115, 130);
+    font-family: Lato, sans-serif;
+    border: 0;
+    border-radius: 0;
+    padding: 9px 15px;
+    text-decoration: none;
+    height: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -10px;
+}
+
+.refund-button:hover {
+    background-color: rgb(32, 73, 80);
+}
+
 .purchase-button:hover {
     background-color: rgb(178, 60, 14);
 }
@@ -206,6 +228,7 @@
     display: flex;
     flex-direction: column;
     width: 90%;
+    max-width: 300px;
     grid-row-gap: 20px;
     position: sticky;
     top: 50px;
@@ -359,7 +382,7 @@
 
 .event-edit-buttons {
     display: flex;
-    width: 90%;
+    width: 50%;
     justify-content: space-between;
     margin-top: 20px;
 }
@@ -369,13 +392,17 @@
     color: #fff;
     line-height: inherit;
     cursor: pointer;
-    background-color: #3898ec;
+    background-color: #188bef;
     border: 0;
     border-radius: 0;
     text-decoration: none;
     padding: 10px;
     width: 110px;
     margin-right: 5px;
+}
+
+.event-edit-submit-button:hover {
+    background-color: #004b8e;
 }
 
 

@@ -68,6 +68,7 @@ const AdminShow = () => {
                 if (data) {
                     setPhotoFile(null)
                     setShowProfileEdit(false)
+                    
                 }
             })
     }

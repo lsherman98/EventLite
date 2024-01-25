@@ -1,9 +1,63 @@
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { like, unLike } from "../../../store/session";
+import { useEffect, useMemo, useState } from "react";
 
 
 
 
 const EventIndexListItem = ({ event }) => {
+
+    const sessionUser = useSelector(state => state.session.user) || null
+    const likes = useMemo(() => sessionUser ? sessionUser.likes : null, [sessionUser]);
+    // if (sessionUser) {
+    //     likes = sessionUser.likes
+    // }
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const [liked, setLiked] = useState(false)
+
+    useEffect(() => {
+        if (likes) {
+            likes.forEach(like => {
+                if (like.id === event.id) {
+                    setLiked(true)
+                    return
+                }
+            })
+        }
+    }, [likes, event.id, sessionUser])
+
+    const heartLiked = "https://assets-global.website-files.com/65a5cd622168466f53db2c04/65a5cd622168466f53db2c17_heart.png"
+    const heartUnliked = "https://assets-global.website-files.com/65a5cd622168466f53db2c04/65a69902acca43a0a41a7448_heart%20(1).png"
+
+    const handleLike = (e) => {
+        e.preventDefault()
+         if (!sessionUser) navigate("/")
+
+          const likeTarget = {
+                event_id: event.id,
+                user_id: sessionUser.id
+            }
+
+         if (!liked) {
+            dispatch(like(likeTarget))
+            .then(data => {
+                if (data) {
+                    setLiked(true)
+                }
+            })
+         } else {
+            dispatch(unLike(likeTarget))
+                .then(res => {
+                    if (res.ok) {
+                        setLiked(false)
+                    }
+                })
+         }
+    }
+
+
 
 
     function convertToRegularTime(time24) {
@@ -35,7 +89,7 @@ const EventIndexListItem = ({ event }) => {
                     <p>{`${event.venue}, ${event.city}`}</p>
                     <p>{`Starts at $${event.price}`}     |     <span>{event.category}</span></p>
                 </div>
-                <img className="event-index-like-button" src="https://assets-global.website-files.com/65a5cd622168466f53db2c04/65a5cd622168466f53db2c17_heart.png" alt="" />
+                <img onClick={handleLike} className={`event-index-like-button ${liked ? 'event-liked' : ''}` } src={liked ? heartLiked : heartUnliked} alt="" />
             </div>
         </Link>
     )

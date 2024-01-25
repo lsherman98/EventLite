@@ -38,7 +38,7 @@ const LoginForm = () => {
             <div className="login-left">
                 <div className="left-content">
                     <div >
-                        <h3 className="login-logo">eventlite</h3>
+                        {/* <h3 className="login-logo">eventlite</h3> */}
                         <h1 className="login-heading">Log In</h1>
                     </div>
                     <div className="login-form-container">
