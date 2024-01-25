@@ -11,6 +11,7 @@ import CreateEvent from "./components/Events/CreateEvent/CreateEvent";
 import TicketIndex from "./components/Tickets/TicketsIndex";
 import EventGenericShow from "./components/Events/EventShow/EventGenericShow";
 import MyEvents from "./components/MyEvents/MyEvents";
+import Footer from "./components/Footer/Footer";
 
 
 
@@ -20,6 +21,7 @@ const Layout = () => {
     <>
       <Navigation />
       <Outlet />
+      <Footer />
     </>
   )
 }

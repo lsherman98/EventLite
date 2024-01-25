@@ -1,14 +1,21 @@
+.create-main-section {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
 .create-headers {
     width: 25%;
     float: none;
     clear: none;
-    margin-top: 50px;
+    margin-top: 100px;
     margin-left: 18rem;
     position: relative;
 }
 
 .create-headers > h1 {
-    margin-top: 20px;
     font-size: 38px;
     line-height: 44px;
 }
@@ -18,8 +25,8 @@
 }
 
 .create-form-container {
-    height: 60vh;
-    margin-top: 40px;
+    height: 100vh;
+    margin-top: 20px;
     display: block;
 }
 
@@ -31,6 +38,7 @@
     align-items: center;
     margin-top: 0;
     display: flex;
+    padding-left: 100px;
 }
 
 .create-form-left {
@@ -40,7 +48,6 @@
     justify-content: flex-start;
     align-self: auto;
     align-items: flex-start;
-    padding-right: 50px;
     display: flex;
 }
 
@@ -51,7 +58,6 @@
     justify-content: flex-start;
     align-items: flex-start;
     margin: 0;
-    padding-left: 50px;
     display: flex;
 }
 
@@ -83,9 +89,6 @@
 }
 
 
-.create-select-option {
-
-}
 
 .form-checkbox > span {
     padding-left: 5px;
@@ -113,3 +116,4 @@
 .create-errors > p{
     margin-bottom: 10px;
 }
+

@@ -22,6 +22,7 @@
     position: sticky;
     top: 0;
     overflow: hidden;
+    
 }
 
 .events-index-right > img {
@@ -32,13 +33,33 @@
     position: relative;
     bottom: auto;
     right: auto;
-    /* overflow: visible; */
     vertical-align: middle;
+    opacity: 45%;
 }
 
 .events-index-headers {
     margin-bottom: 20px;
     padding-bottom: 0;
+}
+
+.events-index-right::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(1, 1, 1); 
+}
+
+.overlay-text {
+    position: absolute;
+    top: 50%;
+    left: 60%;
+    transform: translate(-50%, -50%);
+    color: rgb(255, 255, 255); /* Set the text color */
+    font-size: 32px; /* Adjust the font size */
+    font-weight: bold; /* Set font weight if needed */
 }
 
 
@@ -82,20 +103,22 @@
 .filter-form {
     display: flex;
     flex-direction: column;
+    grid-row-gap: 10px;
 }
 
 .filter-form-label {
     margin-left: 10px;
+
 }
 
 .filter-form-input {
-    height: 25px;
     margin-right: 5px;
 
 }
 
 .filter-label-span {
     cursor: pointer;
+    font-size: 15px;
 }
 
 .events-index-list {

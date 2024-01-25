@@ -21,6 +21,7 @@ const SignUpForm = () => {
 
     useEffect(()=>{
         if (sessionUser) navigate("/");
+        window.scrollTo(0, 0)
     }, [sessionUser, navigate]);
 
     const handleFile = ({currentTarget}) => {

@@ -26,6 +26,7 @@ const CreateEvent = () => {
     const sessionUser = useSelector(state => state.session.user)
     useEffect(()=>{
         if (!sessionUser) navigate("/login");
+        window.scrollTo(0, 0)
     }, [sessionUser, navigate]);
 
     function getCurrentDate() {
@@ -84,7 +85,7 @@ const CreateEvent = () => {
     }
 
     return (
-        <section>
+        <section className="create-main-section">
             <div className="create-headers">
                 <h1>Create an Event</h1>
                 <p>Name your event and tell event-goers why they should come. Add details that highlight what makes it unique.</p>

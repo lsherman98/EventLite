@@ -17,6 +17,7 @@ const LoginForm = () => {
 
     useEffect(()=>{
         if (sessionUser) navigate("/");
+        window.scrollTo(0, 0)
     }, [sessionUser, navigate]);
 
     const handleSubmit = (e) => {

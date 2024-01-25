@@ -160,7 +160,7 @@ const AdminShow = () => {
                         {events.map(ticket => {
                                 return <TicketIndexItem key={ticket.id} ticket={ticket}/>
                             })}
-                        <Link to="/events">Show All Events</Link> 
+                        <Link to="/myevents">Show All Events</Link> 
                     </div>}
                 </div>
 
