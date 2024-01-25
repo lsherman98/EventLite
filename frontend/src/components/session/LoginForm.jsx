@@ -13,6 +13,7 @@ const LoginForm = () => {
     const [credential, setCredential] = useState("")
     const [password, setPassword] = useState("")
     const [errors, setErrors] = useState([])
+    const [loggingIn, setLoggingIn] = useState(false)
 
 
     useEffect(()=>{
@@ -23,9 +24,10 @@ const LoginForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         setErrors([])
-
+        setLoggingIn(true)
         return dispatch(sessionActions.login({credential, password}))
             .then(async (res) => {
+                setLoggingIn(false)
                 let data = res
                 if (data?.errors) setErrors(data.errors)
                 else if (data) setErrors([data])
@@ -38,12 +40,15 @@ const LoginForm = () => {
         <div className="login-page">
             <div className="login-left">
                 <div className="left-content">
-                    <div >
-                        {/* <h3 className="login-logo">eventlite</h3> */}
+                    {!loggingIn && <div>
                         <h1 className="login-heading">Log In</h1>
-                    </div>
+                    </div>}
                     <div className="login-form-container">
-                        <form onSubmit={handleSubmit} className="login-form">
+                        {loggingIn && 
+                        <div className="index-loading-container">
+                            <div className="index-loading-animation"></div>
+                        </div>}
+                        {!loggingIn && <form onSubmit={handleSubmit} className="login-form">
                             <div className="submit-errors">
                                     {errors.map(error => <p key={error}>{error}</p>)}
                             </div>
@@ -87,7 +92,7 @@ const LoginForm = () => {
                                 value="Login" 
                             />
                             </div>
-                        </form>
+                        </form>}
                     </div>
                     <Link to='/signup'>Sign Up</Link>
                 </div>
