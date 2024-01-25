@@ -74,7 +74,6 @@ export const register = ({user_id, event_id, quantity}) => async dispatch => {
         }
     })
     const data = await response.json();
-    console.log(data)
     if (response.ok) {
         // dispatch(addRegistration(data));
         dispatch(loginUser(data.user))
@@ -91,7 +90,6 @@ export const  registrationUpdate = (registration) => async dispatch => {
         }
     })
     const data = await response.json();
-    console.log(data)
     if (response.ok) {
         // dispatch(updateRegistration(data));
         dispatch(loginUser(data.user))
@@ -104,7 +102,6 @@ export const registrationRefund = (registrationId) => async dispatch => {
         method: "DELETE"
     })
     const data = await response.json();
-    console.log(data)
     if (response.ok) {
         // dispatch(removeTicket(data));
         dispatch(loginUser(data.user))
@@ -161,7 +158,6 @@ const sessionReducer = createSlice({
         },
         addRegistration: (state, action) => {
             // state.user.tickets.push(action.payload)
-            console.log(action.payload.user.tickets)
             state.user.tickets = action.payload.user.tickets
         },
         addEvent: (state, action) => {

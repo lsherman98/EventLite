@@ -50,37 +50,29 @@ const EventsIndex = () => {
     }
     const events = useSelector(state => state.events)
 
-    // const cachedEvents = localStorage.getItem('cachedEvents') 
-    const cachedEvents = null
+    const cachedEvents = localStorage.getItem('cachedEvents') 
 
     
 
     useEffect(() => {
         window.scrollTo(0, 0)
 
-        console.log('in use effect')
-
         if (cachedEvents) {
-            console.log('cached events exist')
             const cachedEventsArray = JSON.parse(cachedEvents);
-            console.log(cachedEventsArray[0]['imageUrl'])
             fetch(cachedEventsArray[0]['imageUrl'])
                 .then(res => {
                     if (!res.ok) {
-                        console.log('response not ok')
                         localStorage.clear()
                         dispatch(getEvents())
                             .then(() => {
                                 setLoading(false)
                             })
                     } else {
-                        console.log('response ok')
                         dispatch(addEvents(cachedEventsArray))
                         setLoading(false)
                     }  
                 })
         } else {
-            console.log('cached events dont exist')
             dispatch(getEvents())
                 .then(() => {
                     setLoading(false)

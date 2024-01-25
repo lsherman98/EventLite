@@ -42,7 +42,6 @@ export const updateEvent = (event) => async dispatch => {
         body: event
     })
     let data = await response.json()
-    console.log(data)
     if (response.ok) {
         dispatch(showEvent(data))
         return data
