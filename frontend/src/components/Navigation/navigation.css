@@ -68,13 +68,6 @@
     cursor: pointer;
 }
 
-.dropdown-container {
-    height: 100%;
-    /* display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center; */
-}
 
 .profile-button {
     justify-content: center;
@@ -90,6 +83,9 @@
     color: black;
 }
 
+.dropdown-container {
+    height: 100%;
+}
 
 .profile-dropdown {
     padding-inline-start: 0;
@@ -102,8 +98,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); */
 }
+
 
 .dropdown-item {
     text-align: center;

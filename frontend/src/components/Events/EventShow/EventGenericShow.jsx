@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate, useParams } from "react-router-dom"
 import { Link } from "react-router-dom"
 import "./EventShowGeneric.css"
 import { getEvent } from "../../../store/events"
-import { register, registrationRefund, registrationUpdate } from "../../../store/session"
+import { like, register, registrationRefund, registrationUpdate, unLike } from "../../../store/session"
 import EventAdminShow from "./EventAdminShow"
 
 
@@ -17,6 +17,7 @@ const EventGenericShow = () => {
     
     
     const [showPurchase, setShowPurchase] = useState(false)
+    const event = useSelector(state => state.events.event) || null
     
     const [loginMessage, setLoginMessage] = useState(false)
     const [registered, setRegistered] = useState(false)
@@ -24,20 +25,75 @@ const EventGenericShow = () => {
 
 
     const sessionUser = useSelector(state => state.session.user)
+    const likes = useMemo(() => sessionUser ? sessionUser.likes : null, [sessionUser]);
     const [registrationId, setRegistrationId] = useState(null)
+    const [liked, setLiked] = useState(false)
+    const [numLiked, setNumLiked] = useState()
     
     const [firstName, setFirstName] = useState(sessionUser ? sessionUser.firstName : '')
     const [lastName, setLastName] = useState(sessionUser ? sessionUser.lastName : '')
     const [email, setEmail] = useState(sessionUser ? sessionUser.email : '')
     const [quantity, setQuantity] = useState(1)
-
-
+    
+    useEffect(() => {
+        dispatch(getEvent(eventId))
+        .then((res) => {
+            if (!res.ok) {
+                navigate('/events')
+            }
+        })
+    }, [dispatch, eventId, navigate])
     
     
-    const event = useSelector(state => state.events.event) 
+    useEffect(() => {
+        if (likes && event) {
+            likes.forEach(like => {
+                if (like.id === event.id) {
+                    setLiked(true)
+                    return
+                }
+            })
+        }
+    }, [likes, sessionUser, event])
+
+    const heartLiked = "https://assets-global.website-files.com/65a5cd622168466f53db2c04/65a5cd622168466f53db2c17_heart.png"
+    const heartUnliked = "https://assets-global.website-files.com/65a5cd622168466f53db2c04/65a69902acca43a0a41a7448_heart%20(1).png"
+
+    const handleLike = (e) => {
+        e.preventDefault()
+         if (!sessionUser) navigate("/login")
+
+          const likeTarget = {
+                event_id: event.id,
+                user_id: sessionUser.id
+            }
+
+         if (!liked) {
+            dispatch(like(likeTarget))
+            .then(data => {
+                if (data) {
+                    setLiked(true)
+                    setNumLiked(numLiked + 1)
+                }
+            })
+         } else {
+            dispatch(unLike(likeTarget))
+                .then(res => {
+                    if (res.ok) {
+                        setLiked(false)
+                        setNumLiked(numLiked - 1)
+                    }
+                })
+         }
+    }
+    
+    
     
 
     useEffect(() => {
+        if (event) {
+            setNumLiked(event.totalLikes)
+        }
         if (event && sessionUser) {
             sessionUser.tickets.forEach (ticket => {
                 if (ticket.id === event.id) {
@@ -51,14 +107,7 @@ const EventGenericShow = () => {
     }, [sessionUser, event])
 
 
-    useEffect(() => {
-        dispatch(getEvent(eventId))
-            .then((res) => {
-                if (!res.ok) {
-                    navigate('/events')
-                }
-            })
-    }, [dispatch, eventId, navigate])
+
     
 
  
@@ -143,7 +192,7 @@ const EventGenericShow = () => {
                         <h1>{event.title.toUpperCase()}</h1>
                         <h2>{`${formattedDate}, ${regularTime}`}     |     <span className="event-show-category">{event.category}</span></h2>
                         <h3>Organized by <Link to={`/users/${event.userId}`}>{event.organizer}</Link><span className="adults-only"><span className="divider">     |     </span>{!event.ageLimit ? "This event is 21+" : ""}</span></h3>
-                        <div className="event-show-total-likes"><span>{event.totalLikes}</span>Likes</div>
+                        <div className="event-show-total-likes"><img onClick={handleLike} className={`event-show-like-button ${liked ? 'event-liked' : ''}` } src={liked ? heartLiked : heartUnliked} alt="" /><span>{numLiked}</span></div>
                         <h4 className="location-heading">Location</h4>
                         <p className="location-text">{`${event.venue}`}</p>
                         <p className="location-text">{`${event.address}, ${event.city}`}</p>

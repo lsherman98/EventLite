@@ -89,7 +89,7 @@
     display: flex;
     align-items: center;
     margin-bottom: 35px;
-    border: #000 solid 1px;
+    /* border: #000 solid 1px; */
     width: 25%;
     padding: 5px;
     margin-left: 10px;
@@ -405,8 +405,20 @@
     background-color: #004b8e;
 }
 
+.event-show-like-button {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #cacaca;
+    border-radius: 63px;
+    padding: 10px;
+    position: relative;
+    align-self: flex-end;
+}
 
-
+.event-show-like-button:hover {
+    background-color: #7fb7ff;
+    cursor: pointer;
+}
 
 
 
