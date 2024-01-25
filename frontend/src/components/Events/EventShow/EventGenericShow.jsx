@@ -26,9 +26,9 @@ const EventGenericShow = () => {
     const sessionUser = useSelector(state => state.session.user)
     const [registrationId, setRegistrationId] = useState(null)
     
-    const [firstName, setFirstName] = useState(sessionUser.firstName)
-    const [lastName, setLastName] = useState(sessionUser.lastName)
-    const [email, setEmail] = useState(sessionUser.email)
+    const [firstName, setFirstName] = useState(sessionUser ? sessionUser.firstName : '')
+    const [lastName, setLastName] = useState(sessionUser ? sessionUser.lastName : '')
+    const [email, setEmail] = useState(sessionUser ? sessionUser.email : '')
     const [quantity, setQuantity] = useState(1)
 
 
