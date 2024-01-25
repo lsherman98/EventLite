@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import "./EventShowGeneric.css"
 import EventAttendee from "./EventAttendee";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import EventEdit from "./EventEdit";
 import { useDispatch } from "react-redux";
 import { deleteEvent } from "../../../store/events";
@@ -12,8 +12,14 @@ const EventAdminShow = ({event}) => {
 
     const [showEdit, setShowEdit] = useState(false)
 
+
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
+
     const handleDelete = async () => {
         dispatch(deleteEvent(event.id))
+
         localStorage.removeItem('cachedEvents')
         navigate('/profile')
     }

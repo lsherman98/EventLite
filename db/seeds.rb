@@ -54,7 +54,7 @@ seed_users = json_data['users']
     last_name: "user",
     bio: "I am the first user!"
   ).photo.attach(io: URI.open("https://eventlite-seeds.s3.amazonaws.com/user-images/user-seed.jpeg"), filename: "user-seed.jpeg")
-
+  puts "Demo Created"
   total_users = 1
   # More users
   seed_users.each do |seed_user|

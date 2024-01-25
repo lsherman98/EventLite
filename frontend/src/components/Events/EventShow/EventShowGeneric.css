@@ -343,6 +343,7 @@
   background-color: #f3f3f3;
   padding: 20px;
   border-radius: 20px;
+  min-width: 250px;
 }
 
 .attendee-item {

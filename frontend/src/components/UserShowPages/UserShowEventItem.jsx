@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { like, unLike } from "../../store/session";
@@ -6,18 +6,20 @@ import { like, unLike } from "../../store/session";
 
 const UserShowEventItem = ({event}) => {
     const sessionUser = useSelector(state => state.session.user)
-    const likes = sessionUser.likes
+    const likes = useMemo(() => sessionUser ? sessionUser.likes : null, [sessionUser]);
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const [liked, setLiked] = useState(false)
 
     useEffect(() => {
-        likes.forEach(like => {
-            if (like.id === event.id) {
-                setLiked(true)
-                return
-            }
-        })
+        if (likes) {
+            likes.forEach(like => {
+                if (like.id === event.id) {
+                    setLiked(true)
+                    return
+                }
+            })
+        }
     }, [likes, event.id])
 
     const heartLiked = "https://assets-global.website-files.com/65a5cd622168466f53db2c04/65a5cd622168466f53db2c17_heart.png"
@@ -25,7 +27,7 @@ const UserShowEventItem = ({event}) => {
 
     const handleLike = (e) => {
         e.preventDefault()
-         if (!sessionUser) navigate("/")
+         if (!sessionUser) navigate("/login")
 
           const likeTarget = {
                 event_id: event.id,

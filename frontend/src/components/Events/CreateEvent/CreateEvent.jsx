@@ -80,6 +80,7 @@ const CreateEvent = () => {
                 if (data) {
                     setPhotoFile(null)
                     navigate(`/events/${data.id}`)
+                    navigate(`/profile`)
                 }
             })
     }

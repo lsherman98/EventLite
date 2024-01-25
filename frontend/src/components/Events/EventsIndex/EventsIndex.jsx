@@ -24,7 +24,7 @@ const EventsIndex = () => {
     const [foodChecked, setFoodChecked] = useState(category === 'Food' || false)
     const [performingArtsChecked, setPerformingArtsChecked] = useState(category === 'Performing Arts' || false)
 
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(false)
 
     const handleCheckAll = () => {
         if (allCategoriesChecked) {
@@ -50,12 +50,12 @@ const EventsIndex = () => {
     }
     const events = useSelector(state => state.events)
 
-    const cachedEvents = localStorage.getItem('cachedEvents') 
-
     
-
+    
+    
     useEffect(() => {
         window.scrollTo(0, 0)
+        const cachedEvents = localStorage.getItem('cachedEvents') 
 
         if (cachedEvents) {
             const cachedEventsArray = JSON.parse(cachedEvents);
@@ -83,7 +83,7 @@ const EventsIndex = () => {
             setCityFilter(city)
         }
         setSearchParams({})
-    }, [cachedEvents, city, dispatch, setSearchParams])
+    }, [city, dispatch, setSearchParams])
     
 
 
@@ -146,6 +146,8 @@ const EventsIndex = () => {
                         return event
                 }
             })
+        } else {
+            setLoading(true)
         }
 
 

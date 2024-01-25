@@ -35,6 +35,7 @@
     right: auto;
     vertical-align: middle;
     opacity: 45%;
+    min-height: 100vh;
 }
 
 .events-index-headers {

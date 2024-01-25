@@ -36,6 +36,7 @@ const EventGenericShow = () => {
     const [quantity, setQuantity] = useState(1)
     
     useEffect(() => {
+        
         dispatch(getEvent(eventId))
         .then((res) => {
             if (!res.ok) {
@@ -46,6 +47,7 @@ const EventGenericShow = () => {
     
     
     useEffect(() => {
+        window.scrollTo(0, 0)
         if (likes && event) {
             likes.forEach(like => {
                 if (like.id === event.id) {
