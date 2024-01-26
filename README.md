@@ -23,14 +23,6 @@ A EventLite user can create their own account which persists all activity betwee
 ![gif of profiles](assets/gifs/login.gif)
 
 
-
-When your signed your profile will give you a snapshot of all your organized events, likes, and tickets to upcoming events. 
-
-![gif of profiles](/assets/gifs/userProfile.gif)
-
-
-
-
 A user can always edit their profile after its been created. You can add a bio, or change your profile photo.
 
 ![gif of profiles](/assets/gifs/editProfile.gif)
