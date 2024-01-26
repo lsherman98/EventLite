@@ -49,7 +49,11 @@ const UserShow = () => {
 
 
     if (loading) {
-        return <h1></h1>
+        return(
+             <div className="index-loading-container">
+                <div className="index-loading-animation"></div>
+            </div>
+            )
     } else {
         return (
             <>

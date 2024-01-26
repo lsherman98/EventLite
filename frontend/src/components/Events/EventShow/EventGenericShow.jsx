@@ -34,6 +34,7 @@ const EventGenericShow = () => {
     const [lastName, setLastName] = useState(sessionUser ? sessionUser.lastName : '')
     const [email, setEmail] = useState(sessionUser ? sessionUser.email : '')
     const [quantity, setQuantity] = useState(1)
+    const [refundGiven, setRefundGiven] = useState(false)
     
     useEffect(() => {
         
@@ -151,10 +152,12 @@ const EventGenericShow = () => {
 
     const handleRefund = () => {
         dispatch(registrationRefund(registrationId))
+        setUpdated(false)
         setRegistered(false)
         setRegistrationId(null)
         setQuantity(1)
         setShowPurchase(false)
+        setRefundGiven(true)
     }
     
     
@@ -203,6 +206,7 @@ const EventGenericShow = () => {
                     </div>
                     <div className="event-show-right">
                         {registered && !updated && <h3 className="success-message">Visit your profile to see your tickets!</h3>}
+                        {refundGiven && !registered && <h3 className="success-message">Your refund has been processed</h3>}
                         {updated && <h3 className="success-message">Your order has been updated.</h3>}
                         {!showPurchase && <div className="purchase-div">
                             <h1>${event.price}</h1>
