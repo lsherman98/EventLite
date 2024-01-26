@@ -1,4 +1,4 @@
-#Welcome to EventLite
+# Welcome to EventLite
 
 Check out the [Live Site](https://eventlite-q3yt.onrender.com/)!
 
@@ -14,9 +14,9 @@ Technologies implemented in this project include:
 * Hosting: Render
 * Assest Storage: AWS Simple Cloud Storage (S3)
 
-#MVPs
+# MVPs
 
-##Profiles
+## Profiles
 
 A EventLite user can create their own account which persists all activity between sessions. 
 ![gif of profiles](app/assets/gifs/login.gif)
