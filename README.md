@@ -34,6 +34,45 @@ Viewing and sorting events is as simple as choosing your desired filters and see
 ![gif of profiles](/assets/gifs/eventIndex.gif)
 
 
+On the first visit to the page a fetch request is made to the backend for all the events. If succesful it adds the events to the browsers local storage for future access. Every time the index page is loaded it checks if the image urls are still active, if they are not, the fetch request is made again, otherwise the local storage data is added to the state. 
+
+```
+useEffect(() => {
+        window.scrollTo(0, 0)
+        const cachedEvents = localStorage.getItem('cachedEvents') 
+        setLoading(true)
+
+        if (cachedEvents) {
+            const cachedEventsArray = JSON.parse(cachedEvents);
+            fetch(cachedEventsArray[0]['imageUrl'])
+                .then(res => {
+                    if (!res.ok) {
+                        localStorage.clear()
+                        dispatch(getEvents())
+                            .then(() => {
+                                setLoading(false)
+                            })
+                    } else {
+                        dispatch(addEvents(cachedEventsArray))
+                        setLoading(false)
+                    }  
+                })
+        } else {
+            dispatch(getEvents())
+                .then(() => {
+                    setLoading(false)
+            })
+    }
+        if (city) {
+            setCityFilter(city)
+        }
+        setSearchParams({})
+    }, [city, dispatch, setSearchParams])
+
+
+```
+
+
 
 Once logged in creating an event can be done whenever you like. Dont forget to upload a banner image or flyer for your event.
 
