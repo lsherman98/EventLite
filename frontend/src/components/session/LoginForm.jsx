@@ -33,6 +33,9 @@ const LoginForm = () => {
                 else if (data) setErrors([data])
                 else setErrors([res.statusText])
             })
+            .then(() => {
+                navigate(`/profile`)
+            })
     }
 
 

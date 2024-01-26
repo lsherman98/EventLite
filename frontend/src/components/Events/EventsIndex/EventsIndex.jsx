@@ -56,6 +56,7 @@ const EventsIndex = () => {
     useEffect(() => {
         window.scrollTo(0, 0)
         const cachedEvents = localStorage.getItem('cachedEvents') 
+        setLoading(true)
 
         if (cachedEvents) {
             const cachedEventsArray = JSON.parse(cachedEvents);
@@ -146,9 +147,7 @@ const EventsIndex = () => {
                         return event
                 }
             })
-        } else {
-            setLoading(true)
-        }
+        } 
 
 
         let header = cityFilter
