@@ -19,23 +19,29 @@ Technologies implemented in this project include:
 ## Profiles
 
 A EventLite user can create their own account which persists all activity between sessions. 
-![gif of profiles](app/assets/gifs/login.gif)
+
+![gif of profiles](assets/gifs/login.gif)
 
 When your signed your profile will give you a snapshot of all your organized events, likes, and tickets to upcoming events. 
-![gif of profiles](app/assets/gifs/userProfile.gif)
+
+![gif of profiles](/assets/gifs/userProfile.gif)
 
 
 A user can always edit their profile after its been created. You can add a bio, or change your profile photo.
-![gif of profiles](app/assets/gifs/editProfile.gif)
+
+![gif of profiles](/assets/gifs/editProfile.gif)
 
 Viewing and sorting events is as simple as choosing your desired filters and seeing the available events change. 
-![gif of profiles](app/assets/gifs/eventIndex.gif)
+
+![gif of profiles](/assets/gifs/eventIndex.gif)
 
 Once logged in creating an event can be done whenever you like. Dont forget to upload a banner image or flyer for your event.
-![gif of profiles](app/assets/gifs/createEvent.gif)
 
-To like an event and save it for later just click the heart icon present on every event card. To see all the events you have liked in one place, go to your likes tab located in the navigation bar. 
-![gif of profiles](app/assets/gifs/likes.gif)
+![gif of profiles](/assets/gifs/createEvent.gif)
+
+To like an event and save it for later just click the heart icon present on every event card. To see all the events you have liked in one place, go to your likes tab located in the navigation bar.
+ 
+![gif of profiles](/assets/gifs/likes.gif)
 
 
 ### Thanks
