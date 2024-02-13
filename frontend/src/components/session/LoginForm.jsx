@@ -26,16 +26,19 @@ const LoginForm = () => {
         setErrors([])
         setLoggingIn(true)
         return dispatch(sessionActions.login({credential, password}))
-            .then(async (res) => {
+            .then((res) => {
                 setLoggingIn(false)
                 let data = res
-                if (data?.errors) setErrors(data.errors)
-                else if (data) setErrors([data])
-                else setErrors([res.statusText])
+                if (data?.errors) {
+                    setErrors(data.errors)
+                } else {
+                    navigate(`/profile`)
+                }
             })
-            .then(() => {
-                navigate(`/profile`)
-            })
+            .catch(() => {
+                setLoggingIn(false);
+                setErrors(["An error occurred during login. Please try again."]);
+        });
     }
 
 

@@ -32,7 +32,7 @@ export const createEvent = (event) => async dispatch => {
         dispatch(addEvent(data.event))
         return data.event
     } else {
-        return data.event
+        return data
     }
 }
 
@@ -46,7 +46,7 @@ export const updateEvent = (event) => async dispatch => {
         dispatch(showEvent(data))
         return data
     } else {
-        return data.errors
+        return data
     }
 }
 
@@ -59,7 +59,6 @@ export const deleteEvent = (eventId) => async dispatch => {
         dispatch(removeEvent(data.event))
     }
 }
-
 
 const eventReducer = createSlice({
     name: 'events',

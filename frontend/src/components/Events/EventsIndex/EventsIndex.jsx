@@ -57,23 +57,25 @@ const EventsIndex = () => {
         window.scrollTo(0, 0)
         const cachedEvents = localStorage.getItem('cachedEvents') 
         setLoading(true)
-
+        // console.log('in use effect')
         if (cachedEvents) {
+            // console.log('cached events exist')
             const cachedEventsArray = JSON.parse(cachedEvents);
             fetch(cachedEventsArray[0]['imageUrl'])
-                .then(res => {
-                    if (!res.ok) {
+                .then(() => {
+                        // console.log('links are still good')
+                        dispatch(addEvents(cachedEventsArray))
+                        setLoading(false)
+                }).catch(() => {
+                        // console.log('access denied')
                         localStorage.clear()
                         dispatch(getEvents())
                             .then(() => {
                                 setLoading(false)
                             })
-                    } else {
-                        dispatch(addEvents(cachedEventsArray))
-                        setLoading(false)
-                    }  
-                })
+                    }) 
         } else {
+            // console.log('cached events dont exist')
             dispatch(getEvents())
                 .then(() => {
                     setLoading(false)

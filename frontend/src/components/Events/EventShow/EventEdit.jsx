@@ -54,16 +54,13 @@ const EventEdit = ({event, setShowEdit}) => {
         return dispatch(updateEvent(updatedEvent))
             .then(async (res) => {
                 let data = res
-                if (data?.errors) setErrors(data.errors)
-                return data
-            })
-            .then((data) => {
-                if (data) {
+                if (data?.errors) {
+                    setErrors(data.errors)
+                } else {
                     setPhotoFile(null)
                     setShowEdit(false)
                 }
             })
-
     }
 
     function getCurrentDate() {

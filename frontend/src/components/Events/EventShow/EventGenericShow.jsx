@@ -197,7 +197,7 @@ const EventGenericShow = () => {
                         <h1>{event.title.toUpperCase()}</h1>
                         <h2>{`${formattedDate}, ${regularTime}`}     |     <span className="event-show-category">{event.category}</span></h2>
                         <h3>Organized by <Link to={`/users/${event.userId}`}>{event.organizer}</Link><span className="adults-only"><span className="divider">     |     </span>{!event.ageLimit ? "This event is 21+" : ""}</span></h3>
-                        <div className="event-show-total-likes"><img onClick={handleLike} className={`event-show-like-button ${liked ? 'event-liked' : ''}` } src={liked ? heartLiked : heartUnliked} alt="" /><span>{numLiked}</span></div>
+                        <div className="event-show-total-likes"><img onClick={handleLike} className={`event-show-like-button ${liked ? 'event-liked' : ''}` } src={liked ? heartLiked : heartUnliked} alt="" /></div>
                         <h4 className="location-heading">Location</h4>
                         <p className="location-text">{`${event.venue}`}</p>
                         <p className="location-text">{`${event.address}, ${event.city}`}</p>
@@ -209,7 +209,7 @@ const EventGenericShow = () => {
                         {refundGiven && !registered && <h3 className="success-message">Your refund has been processed</h3>}
                         {updated && <h3 className="success-message">Your order has been updated.</h3>}
                         {!showPurchase && <div className="purchase-div">
-                            <h1>${event.price}</h1>
+                            <h1>Tickets: ${event.price}</h1>
                             <div className="purchase-button" onClick={() => {
                                 if (!sessionUser) {
                                     setLoginMessage(true)

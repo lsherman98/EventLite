@@ -120,12 +120,18 @@
 
 }
 
-
 .login-right {
-    width: 40%;
-    background-image: url(https://assets-global.website-files.com/65972da33a848ad8e00a649c/65a1b89dd783864da95d4005_lateral-image-2.jpg);
-    background-position-x: 0%;
-    background-position-y: center;
-    background-size: auto;
+    width: 60%;
+    background-image: url(https://cdn.evbstatic.com/s3-build/perm_001/8aa0b4/django/images/login/lateral-image-3-hd.jpg);
+    background-position: 0;
+    background-size: cover;
+    overflow: hidden;
+}
+
+.signup-right {
+    width: 60%;
+    background-image: url(https://cdn.evbstatic.com/s3-build/perm_001/0fff4c/django/images/login/lateral-image-2-hd.jpg);
+    background-position: 0;
+    background-size: cover;
     overflow: hidden;
 }

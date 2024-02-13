@@ -146,7 +146,7 @@ const SignUpForm = () => {
                                 required
                             />
 
-                            <label > Upload an profile photo: <br />
+                            <label > Upload a profile photo: <br />
                                 <input type="file" onChange={handleFile} className="image-upload"/>
                             </label>
 
@@ -162,7 +162,7 @@ const SignUpForm = () => {
                     <Link to='/login'>Log in</Link>
                 </div>
             </div>
-            <div className="login-right">
+            <div className="signup-right">
 
             </div>
 

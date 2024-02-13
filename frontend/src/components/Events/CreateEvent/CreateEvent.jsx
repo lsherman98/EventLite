@@ -71,16 +71,11 @@ const CreateEvent = () => {
        dispatch(createEvent(newEvent))
             .then(async (res) => {
                 let data = res
-                if (data?.errors) setErrors(data.errors)
-                else if (data) setErrors([data])
-                // else setErrors([res.statusText])
-                return data
-            })
-            .then((data) => {
-                if (data) {
+                if (data?.errors) {
+                    setErrors(data.errors)
+                } else {
                     setPhotoFile(null)
                     navigate(`/events/${data.id}`)
-                    // navigate(`/myevents`)
                 }
             })
     }

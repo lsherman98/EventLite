@@ -13,7 +13,7 @@ export const login = (user) => async dispatch => {
         sessionStorage.setItem('currentUser', JSON.stringify(data.user));
         return data
     } else {
-        return data.errors
+        return data
     }
 };
 
@@ -77,7 +77,7 @@ export const register = ({user_id, event_id, quantity}) => async dispatch => {
     if (response.ok) {
         // dispatch(addRegistration(data));
         dispatch(loginUser(data.user))
-        sessionStorage.setItem('currentUser', JSON.stringify(data.user))
+        // sessionStorage.setItem('currentUser', JSON.stringify(data.user))
     }
 }
 
@@ -89,11 +89,12 @@ export const  registrationUpdate = (registration) => async dispatch => {
             "content-type": "application/json"
         }
     })
+    // eslint-disable-next-line no-unused-vars
     const data = await response.json();
     if (response.ok) {
-        // dispatch(updateRegistration(data));
+        // dispatch(updateRegistration(registration));
         dispatch(loginUser(data.user))
-        sessionStorage.setItem('currentUser', JSON.stringify(data.user))
+        // sessionStorage.setItem('currentUser', JSON.stringify(data.user))
     }
 }
 
@@ -105,7 +106,7 @@ export const registrationRefund = (registrationId) => async dispatch => {
     if (response.ok) {
         // dispatch(removeTicket(data));
         dispatch(loginUser(data.user))
-        sessionStorage.setItem('currentUser', JSON.stringify(data.user))
+        // sessionStorage.setItem('currentUser', JSON.stringify(data.user))
     }
 }
 
@@ -164,7 +165,7 @@ const sessionReducer = createSlice({
             state.user.events.push(action.payload)
         },
         removeEvent: (state, action) => {
-            state.user.events = state.session.user.events.filter(event => event !== action.payload)
+            state.user.events = state.user.events.filter(event => event.id !== action.payload.id)
         },
         addLike: (state, action) => {
             state.user.likes.push(action.payload)
@@ -175,7 +176,7 @@ const sessionReducer = createSlice({
         updateRegistration: (state, action) => {
            state.user.tickets.forEach(ticket => {
                 if (ticket.registrationId === action.payload.id) {
-                    ticket.ticketAmount = action.payload.quantity
+                    ticket.ticketAmount = parseInt(action.payload.quantity)
                 } 
            })
         },

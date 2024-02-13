@@ -19,9 +19,11 @@ const EventAdminShow = ({event}) => {
 
     const handleDelete = async () => {
         dispatch(deleteEvent(event.id))
-
-        localStorage.removeItem('cachedEvents')
-        navigate('/profile')
+         .then(() => {
+            navigate('/profile')
+          }
+            )
+        // localStorage.removeItem('cachedEvents')
     }
 
     function convertToRegularTime(time24) {

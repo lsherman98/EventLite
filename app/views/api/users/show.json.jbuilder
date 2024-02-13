@@ -1,3 +1,5 @@
+
+
 json.user do
   json.extract! @user, :id, :email, :username, :first_name, :last_name, :bio, :created_at
   json.imageUrl @user.photo.attached? ? @user.photo.url : nil
