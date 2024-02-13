@@ -89,4 +89,3 @@ To like an event and save it for later just click the heart icon present on ever
 
 ### Thanks
 
-Webflix was built in 14 days.
