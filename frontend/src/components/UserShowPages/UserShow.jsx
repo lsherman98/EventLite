@@ -77,9 +77,9 @@ const UserShow = () => {
                                 <div className="info-modal-bio">
                                     <p>{user.bio}</p>
                                     <div className="social-media-icons">
-                                        <img src="https://assets-global.website-files.com/65a5cd622168466f53db2c04/65a5f63f9b4dab4f4c3ed66f_instagram.png" alt="" />
-                                        <img src="https://assets-global.website-files.com/65a5cd622168466f53db2c04/65a5f63f6a22911ef5bf43e0_world-wide-web.png" alt="" />
-                                        <img src="https://assets-global.website-files.com/65a5cd622168466f53db2c04/65a5f63f769713f93a03886d_facebook.png" alt="" />
+                                        <a href="https://www.linkedin.com/in/lsherman98/" target="_none"><i className="fa-brands fa-linkedin linkedin"></i></a>
+                                        <a href="" target="_none"><i className="fa-solid fa-link website"></i></a>
+                                        <a href="https://github.com/lsherman98" target="_none"><i className="fa-brands fa-github github"></i></a>
                                     </div>
                                 </div>
                             </div>

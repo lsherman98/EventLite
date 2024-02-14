@@ -55,7 +55,8 @@ const EventsIndex = () => {
     
     useEffect(() => {
         window.scrollTo(0, 0)
-        const cachedEvents = localStorage.getItem('cachedEvents') 
+        // const cachedEvents = localStorage.getItem('cachedEvents') 
+        const cachedEvents = null
         setLoading(true)
         // console.log('in use effect')
         if (cachedEvents) {

@@ -102,14 +102,24 @@
 .social-media-icons {
     display: flex;
     justify-content: center;
-    margin-top: 20px;
+    margin-top: 40px;
 }
 
-.social-media-icons > img {
-    width: 45px;
+.social-media-icons > a > i {
+    transform: scale(3);
     padding: 5px;
-    margin-left: 15px;
-    margin-right: 15px;
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+.social-media-icons .linkedin {
+    color: rgb(64, 131, 175);
+}
+.social-media-icons .website {
+    color: rgb(43, 154, 83);
+}
+.social-media-icons .github {
+    color: rgb(169, 33, 164);
 }
 
 
