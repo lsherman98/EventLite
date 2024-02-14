@@ -12,9 +12,9 @@ const ProfileButton = ({ user }) => {
 
     const handleLogout = (e) => {
         e.preventDefault();
+        localStorage.clear()
         dispatch(logout());
         navigate('/')
-
     };
 
     return (
