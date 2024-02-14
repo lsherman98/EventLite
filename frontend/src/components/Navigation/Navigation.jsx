@@ -22,7 +22,7 @@ const Navigation = () => {
         <div className='navbar'>
             <div className='nav-container'>
                 <NavLink className='nav-logo' to="/">
-                    <h1>eventlite</h1>
+                    <h1>EventLite</h1>
                 </NavLink>
                 <div className='nav-menu'>
                     <div className='nav-links'>
